@@ -3,42 +3,277 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles,
-  Target,
-  Wallet,
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
   TrendingUp,
-  ArrowUpRight,
   ShieldCheck,
   Zap,
+  Users,
+  Sparkles,
   PieChart,
-  Calendar,
-  Layers,
-  ArrowDownRight,
+  Wallet,
+  Clock,
   CheckCircle2,
+  Lock,
+  Building,
 } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { BorderBeam } from "@/components/ui/BorderBeam";
+
+interface FinanceCard {
+  id: string;
+  tag: string;
+  tagIcon: React.ElementType;
+  title: string;
+  description: string;
+  ctaText: string;
+  highlight: string;
+  imageTheme: string;
+  accentColor: "gold" | "cyan" | "emerald" | "indigo" | "blue";
+  visualSvg: React.ReactNode;
+}
+
+const FINANCE_CARDS: FinanceCard[] = [
+  {
+    id: "cashflow",
+    tag: "Autonomous AI Intelligence",
+    tagIcon: PieChart,
+    title: "REAL-TIME CASH FLOW & EXPENSE INTELLIGENCE",
+    description:
+      "Onboard AI analyzes every transaction across 18+ national merchants in real-time, detecting budget leaks and forecasting monthly spending velocity.",
+    ctaText: "EXPLORE CASH FLOW",
+    highlight: "ETB 34,500 Tracked • 8.4% Under Budget",
+    imageTheme: "from-blue-900 via-indigo-950 to-[#060b17]",
+    accentColor: "gold",
+    visualSvg: (
+      <div className="relative w-full h-full flex flex-col justify-between p-5 overflow-hidden">
+        {/* Abstract High-Tech Dashboard Visual */}
+        <div className="flex justify-between items-center z-10">
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[10px] font-mono font-bold text-cyan-300">AI RADAR LIVE</span>
+          </div>
+          <span className="text-[10px] font-mono text-slate-400 bg-white/10 px-2 py-0.5 rounded">
+            AUG 2026
+          </span>
+        </div>
+
+        {/* Dynamic Chart Nodes */}
+        <div className="relative z-10 my-auto py-2">
+          <div className="flex items-end justify-between gap-2 h-24 px-2">
+            {[45, 68, 35, 85, 55, 92, 70].map((h, i) => (
+              <div key={i} className="flex-1 flex flex-col items-center gap-1.5">
+                <div
+                  style={{ height: `${h}%` }}
+                  className={`w-full rounded-t-lg transition-all duration-500 ${
+                    i === 5
+                      ? "bg-gradient-to-t from-amber-500 to-amber-300 shadow-lg shadow-amber-500/30"
+                      : "bg-gradient-to-t from-blue-600/60 to-cyan-400/80"
+                  }`}
+                />
+                <span className="text-[9px] font-mono text-slate-400">D{i + 1}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono text-slate-300 z-10">
+          <span>Net Velocity:</span>
+          <span className="text-amber-400 font-bold font-mono">+14.2% Savings</span>
+        </div>
+
+        {/* Ambient Grid overlay */}
+        <div className="absolute inset-0 bg-grid-fintech opacity-30 pointer-events-none" />
+      </div>
+    ),
+  },
+  {
+    id: "eqwub",
+    tag: "NBE-Regulated Escrow",
+    tagIcon: Users,
+    title: "DIGITAL ROTATING EQWUB & ESCROW POOL",
+    description:
+      "Automated group savings backed by Dashen Bank escrow guarantee. Join verified national circles with zero default risk and scheduled lump-sum payouts.",
+    ctaText: "JOIN EQWUB CIRCLE",
+    highlight: "100% Escrow Backed • 12-Month Rotation",
+    imageTheme: "from-amber-950/80 via-yellow-950/60 to-[#0a0802]",
+    accentColor: "gold",
+    visualSvg: (
+      <div className="relative w-full h-full flex flex-col justify-between p-5 overflow-hidden">
+        <div className="flex justify-between items-center z-10">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-amber-400" />
+            <span className="text-[10px] font-mono font-bold text-amber-300">ESCROW ACTIVE</span>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+            ROUND 4/12
+          </span>
+        </div>
+
+        {/* Central Rotating Circle Graphic */}
+        <div className="relative z-10 my-auto flex items-center justify-center">
+          <div className="w-24 h-24 rounded-full border-2 border-dashed border-amber-400/40 flex items-center justify-center relative animate-[spin_20s_linear_infinite]">
+            <div className="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center">
+              <Wallet className="w-7 h-7 text-amber-300" />
+            </div>
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-emerald-400 shadow-md shadow-emerald-400/50" />
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400" />
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono text-slate-300 z-10">
+          <span>Target Payout:</span>
+          <span className="text-amber-400 font-bold font-mono">ETB 120,000.00</span>
+        </div>
+
+        <div className="absolute inset-0 bg-radial-gradient from-amber-500/10 to-transparent pointer-events-none" />
+      </div>
+    ),
+  },
+  {
+    id: "guard",
+    tag: "Predictive Automation",
+    tagIcon: ShieldCheck,
+    title: "PREDICTIVE BILL GUARD & AUTO-CLEARANCE",
+    description:
+      "Intelligent scheduling monitors your EEU electricity meters, Ethio Telecom fiber, and municipal bills with automated zero-late-fee clearance.",
+    ctaText: "CONFIGURE BILL GUARD",
+    highlight: "0% Late Fee Penalty • Auto-Debit Active",
+    imageTheme: "from-emerald-950 via-teal-950 to-[#020a08]",
+    accentColor: "gold",
+    visualSvg: (
+      <div className="relative w-full h-full flex flex-col justify-between p-5 overflow-hidden">
+        <div className="flex justify-between items-center z-10">
+          <div className="flex items-center gap-2">
+            <Zap className="w-4 h-4 text-emerald-400" />
+            <span className="text-[10px] font-mono font-bold text-emerald-300">AUTO-PAY SECURED</span>
+          </div>
+          <span className="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded">
+            3 DUE IN 72H
+          </span>
+        </div>
+
+        {/* Stacked Bill Tokens */}
+        <div className="relative z-10 my-auto space-y-2">
+          <div className="p-2.5 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center justify-between">
+            <span className="text-xs font-bold text-white">EEU Electricity Smart Meter</span>
+            <span className="text-xs font-mono text-emerald-300 font-bold">ETB 1,450</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between opacity-80">
+            <span className="text-xs font-bold text-white">Ethio Telecom 5G Fiber</span>
+            <span className="text-xs font-mono text-cyan-300 font-bold">ETB 2,800</span>
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono text-slate-300 z-10">
+          <span>Penalty Protected:</span>
+          <span className="text-emerald-400 font-bold font-mono">ETB 0.00 Fees</span>
+        </div>
+
+        <div className="absolute inset-0 bg-grid-fintech opacity-20 pointer-events-none" />
+      </div>
+    ),
+  },
+  {
+    id: "savings",
+    tag: "High-Yield Growth",
+    tagIcon: Sparkles,
+    title: "HIGH-YIELD TARGET GOAL POTS & WEALTH VAULT",
+    description:
+      "Lock funds for vehicles, real estate, or holidays with up to 14.5% annual interest yield compounded monthly with zero lock-in withdrawal penalty.",
+    ctaText: "START SAVINGS POT",
+    highlight: "Up to 14.5% APY • Monthly Compound",
+    imageTheme: "from-indigo-950 via-purple-950 to-[#080314]",
+    accentColor: "gold",
+    visualSvg: (
+      <div className="relative w-full h-full flex flex-col justify-between p-5 overflow-hidden">
+        <div className="flex justify-between items-center z-10">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span className="text-[10px] font-mono font-bold text-purple-300">14.5% APY YIELD</span>
+          </div>
+          <span className="text-[10px] font-mono text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded">
+            COMPOUNDING
+          </span>
+        </div>
+
+        <div className="relative z-10 my-auto text-center space-y-1">
+          <div className="text-[10px] font-mono text-slate-400 uppercase">Annual Projected Interest</div>
+          <div className="text-2xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-amber-300 to-cyan-300">
+            +ETB 48,250.00
+          </div>
+          <div className="text-[10px] text-emerald-400 font-mono">✓ Paid directly on the 1st of every month</div>
+        </div>
+
+        <div className="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono text-slate-300 z-10">
+          <span>Lock Status:</span>
+          <span className="text-purple-300 font-bold font-mono">Flexible Access</span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "credit",
+    tag: "Instant Liquidity",
+    tagIcon: TrendingUp,
+    title: "AI CREDIT SCORING & 30-SECOND SALARY ADVANCE",
+    description:
+      "Access up to 3x your verified monthly salary in under 30 seconds with automated credit scoring, zero paperwork, and flexible salary deductions.",
+    ctaText: "CHECK ELIGIBILITY",
+    highlight: "30-Second Approval • Collateral-Free",
+    imageTheme: "from-blue-950 via-cyan-950 to-[#020a10]",
+    accentColor: "gold",
+    visualSvg: (
+      <div className="relative w-full h-full flex flex-col justify-between p-5 overflow-hidden">
+        <div className="flex justify-between items-center z-10">
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-cyan-400" />
+            <span className="text-[10px] font-mono font-bold text-cyan-300">INSTANT DISBURSAL</span>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+            PRE-APPROVED
+          </span>
+        </div>
+
+        <div className="relative z-10 my-auto p-3 rounded-2xl bg-black/40 border border-cyan-400/30 space-y-2">
+          <div className="flex justify-between text-xs font-mono">
+            <span className="text-slate-400">Available Limit:</span>
+            <span className="text-white font-bold">ETB 75,000.00</span>
+          </div>
+          <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+            <div className="w-3/4 h-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+          </div>
+          <div className="text-[10px] font-mono text-cyan-300 text-right">3x Monthly Salary</div>
+        </div>
+
+        <div className="flex justify-between items-center pt-2 border-t border-white/10 text-xs font-mono text-slate-300 z-10">
+          <span>Fee Structure:</span>
+          <span className="text-cyan-300 font-bold font-mono">1.2% Flat Rate</span>
+        </div>
+      </div>
+    ),
+  },
+];
 
 export const BudgetingSection = () => {
-  const [activeTab, setActiveTab] = useState<"cashflow" | "eqwub" | "guard">("cashflow");
-  const [monthlyIncome, setMonthlyIncome] = useState<number>(45000);
-  const [eqwubCycle, setEqwubCycle] = useState<number>(10000);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const categories = [
-    { name: "Dining & Groceries", amount: 14200, pct: 42, color: "bg-blue-500", trend: "+4.2%" },
-    { name: "Flights & Travel", amount: 8500, pct: 25, color: "bg-cyan-400", trend: "-1.8%" },
-    { name: "Utilities & Bills", amount: 6800, pct: 20, color: "bg-blue-400/80", trend: "-8.5%" },
-    { name: "Eqwub Savings Pool", amount: 5000, pct: 13, color: "bg-cyan-300", trend: "+12.0%" },
-  ];
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? FINANCE_CARDS.length - 1 : prev - 1));
+  };
 
-  const totalSpent = categories.reduce((acc, c) => acc + c.amount, 0);
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === FINANCE_CARDS.length - 1 ? 0 : prev + 1));
+  };
 
   return (
-    <SectionWrapper id="budgeting" glow="split" className="py-32 sm:py-40">
+    <SectionWrapper id="budgeting" glow="split" className="py-28 sm:py-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* ── Section header ─────────────────────────── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-16 mb-16">
+        {/* ── Section Header ─────────────────────────── */}
+        <div
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8
+                        border-b border-white/[0.06] pb-12 mb-14"
+        >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -48,331 +283,201 @@ export const BudgetingSection = () => {
             <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
               AI Predictive Engine
             </span>
-            <h2 className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]">
+            <h2
+              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
+                           uppercase leading-[0.85]"
+            >
               Every Birr.
               <br />
               Commanded.
             </h2>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.12 }}
-            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
-                       uppercase tracking-widest md:text-right"
-          >
-            Experience real-time AI spending classifications, high-yield goal pots, and transparent digital Eqwub circles in one unified cockpit.
-          </motion.p>
+          <div className="flex flex-col md:items-end gap-4">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, delay: 0.12 }}
+              className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+                         uppercase tracking-widest md:text-right"
+            >
+              Experience real-time AI spending velocity, NBE-regulated Eqwub escrow circles, and predictive bill clearance.
+            </motion.p>
+
+            {/* Navigation Arrows */}
+            <div className="flex items-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous card"
+                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 hover:border-amber-400/50 hover:bg-white/[0.08] text-white flex items-center justify-center transition-all cursor-pointer group"
+              >
+                <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform text-slate-300 group-hover:text-amber-400" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next card"
+                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 hover:border-amber-400/50 hover:bg-white/[0.08] text-white flex items-center justify-center transition-all cursor-pointer group"
+              >
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform text-slate-300 group-hover:text-amber-400" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Interactive Feature Tab Selector */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center p-1.5 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl gap-1 sm:gap-2">
-            {[
-              { id: "cashflow", label: "Real-Time Cash Flow", icon: PieChart },
-              { id: "eqwub", label: "Smart Eqwub Yield Pool", icon: Wallet },
-              { id: "guard", label: "Predictive Bill Guard", icon: ShieldCheck },
-            ].map((tab) => {
-              const Icon = tab.icon;
-              const isSelected = activeTab === tab.id;
+        {/* ── 3D Spotlight Card Deck Carousel ─────────── */}
+        <div className="relative w-full h-[580px] sm:h-[620px] flex items-center justify-center">
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+            {FINANCE_CARDS.map((card, index) => {
+              // Calculate offset relative to active card
+              let offset = index - activeIndex;
+              const total = FINANCE_CARDS.length;
+
+              // Handle wrap-around math for circular infinite carousel
+              if (offset < -Math.floor(total / 2)) offset += total;
+              if (offset > Math.floor(total / 2)) offset -= total;
+
+              const isCenter = offset === 0;
+              const isLeft = offset === -1;
+              const isRight = offset === 1;
+              const isFarLeft = offset < -1;
+              const isFarRight = offset > 1;
+
+              // Compute transforms for 3D spotlight card fan effect
+              let xPos = 0;
+              let scale = 0.85;
+              let opacity = 0;
+              let zIndex = 10;
+
+              if (isCenter) {
+                xPos = 0;
+                scale = 1.05;
+                opacity = 1;
+                zIndex = 30;
+              } else if (isLeft) {
+                xPos = -320;
+                scale = 0.9;
+                opacity = 0.65;
+                zIndex = 20;
+              } else if (isRight) {
+                xPos = 320;
+                scale = 0.9;
+                opacity = 0.65;
+                zIndex = 20;
+              } else if (isFarLeft) {
+                xPos = -540;
+                scale = 0.75;
+                opacity = 0;
+                zIndex = 10;
+              } else if (isFarRight) {
+                xPos = 540;
+                scale = 0.75;
+                opacity = 0;
+                zIndex = 10;
+              }
+
               return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                    isSelected
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 border border-blue-400/40"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
+                <motion.div
+                  key={card.id}
+                  animate={{
+                    x: xPos,
+                    scale: scale,
+                    opacity: opacity,
+                    zIndex: zIndex,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 28,
+                  }}
+                  onClick={() => setActiveIndex(index)}
+                  className={`absolute w-[310px] sm:w-[360px] md:w-[390px] h-[520px] sm:h-[550px] rounded-[28px] sm:rounded-[32px] overflow-hidden cursor-pointer transition-shadow duration-500 flex flex-col justify-between ${
+                    isCenter
+                      ? "border-2 border-amber-400 bg-[#070c18] shadow-[0_30px_90px_-15px_rgba(245,158,11,0.25),0_20px_50px_-10px_rgba(0,0,0,0.9)]"
+                      : "border border-white/10 bg-[#090e1a] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] hover:opacity-85 hover:border-white/20"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isSelected ? "text-cyan-200" : "text-slate-400"}`} />
-                  <span className="hidden sm:inline">{tab.label}</span>
-                  <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
-                </button>
+                  {/* Top Image / Visual Display Area */}
+                  <div
+                    className={`h-[220px] sm:h-[240px] w-full bg-gradient-to-b ${card.imageTheme} border-b ${
+                      isCenter ? "border-amber-400/30" : "border-white/10"
+                    } relative flex items-center justify-center`}
+                  >
+                    {card.visualSvg}
+
+                    {/* Top Highlight Badge */}
+                    <div className="absolute top-3.5 left-3.5 z-20">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-black/60 backdrop-blur-md border border-white/15 text-white">
+                        <card.tagIcon className="w-3 h-3 text-amber-400" />
+                        <span>{card.tag}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Text Content & Action Area */}
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between bg-gradient-to-b from-[#0a0f1d] to-[#050811]">
+                    <div className="space-y-2.5">
+                      <h3
+                        className={`text-base sm:text-lg font-black tracking-tight leading-snug uppercase ${
+                          isCenter ? "text-white" : "text-slate-200"
+                        }`}
+                      >
+                        {card.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                        {card.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`text-xs font-bold font-mono tracking-wider transition-colors flex items-center gap-1.5 ${
+                            isCenter
+                              ? "text-amber-400 group-hover:text-amber-300"
+                              : "text-slate-400"
+                          }`}
+                        >
+                          <span>{card.ctaText}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+
+                      <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                        {card.id === "eqwub"
+                          ? "NBE ESCROW"
+                          : card.id === "guard"
+                          ? "0% LATE FEE"
+                          : card.id === "savings"
+                          ? "14.5% APY"
+                          : card.id === "credit"
+                          ? "30s APPROVAL"
+                          : "AI ACTIVE"}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* FULL-WIDTH INTERACTIVE COCKPIT CONTAINER */}
-        <div className="relative rounded-[36px] bg-gradient-to-b from-[#0a1122]/90 via-[#070b16]/90 to-[#04070e]/95 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden">
-          <BorderBeam size={350} duration={12} colorFrom="#38bdf8" colorTo="#3b82f6" />
-
-          {/* Ambient Lighting Rays inside the canvas */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none" />
-
-          <AnimatePresence mode="wait">
-            {/* TAB 1: REAL-TIME CASH FLOW */}
-            {activeTab === "cashflow" && (
-              <motion.div
-                key="cashflow"
-                initial={{ opacity: 0, scale: 0.98, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.98, y: -15 }}
-                transition={{ duration: 0.4 }}
-                className="space-y-8"
-              >
-                {/* Metric Summary Ribbon */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                    <div className="text-[11px] font-mono text-slate-400 uppercase tracking-widest">
-                      Total Tracked Spend
-                    </div>
-                    <div className="text-3xl font-black text-white font-mono mt-1">
-                      ETB {totalSpent.toLocaleString()}.00
-                    </div>
-                    <div className="text-xs text-emerald-400 font-mono flex items-center gap-1 mt-1">
-                      <TrendingUp className="w-3.5 h-3.5" />
-                      <span>8.4% under monthly budget</span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                    <div className="text-[11px] font-mono text-slate-400 uppercase tracking-widest">
-                      AI Projected Savings
-                    </div>
-                    <div className="text-3xl font-black text-cyan-300 font-mono mt-1">
-                      ETB {(monthlyIncome - totalSpent).toLocaleString()}.00
-                    </div>
-                    <div className="text-xs text-cyan-400 font-mono flex items-center gap-1 mt-1">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>Yielding 8.5% annual return</span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-blue-950/40 border border-blue-500/30 flex flex-col justify-between">
-                    <div>
-                      <div className="text-[11px] font-mono text-blue-300 uppercase tracking-widest">
-                        Smart AI Guard Active
-                      </div>
-                      <p className="text-xs text-slate-300 mt-1">
-                        Zero unauthorized recurring charges detected across 18 connected merchants.
-                      </p>
-                    </div>
-                    <div className="text-[11px] text-cyan-300 font-mono font-bold flex items-center gap-1 mt-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>Live Protection On</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Progress Distribution Bar */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs text-slate-400 font-mono">
-                    <span>Category Distribution</span>
-                    <span className="text-slate-300">August 2026</span>
-                  </div>
-                  <div className="h-3 rounded-full bg-slate-900/90 overflow-hidden flex gap-1 p-0.5 border border-white/10">
-                    {categories.map((c, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${c.pct}%` }}
-                        transition={{ duration: 0.8, delay: i * 0.1 }}
-                        className={`${c.color} h-full rounded-full`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* 4 Interactive Category Breakdown Tiles */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {categories.map((cat, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -4, borderColor: "rgba(56, 189, 248, 0.4)" }}
-                      className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.07] transition-all"
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <div className={`w-3 h-3 rounded-full ${cat.color}`} />
-                        <span className="text-xs font-mono font-bold text-slate-400">
-                          {cat.trend}
-                        </span>
-                      </div>
-                      <div className="text-xs font-semibold text-slate-300">{cat.name}</div>
-                      <div className="text-xl font-bold text-white font-mono mt-1">
-                        ETB {cat.amount.toLocaleString()}
-                      </div>
-                      <div className="text-[11px] text-slate-500 font-mono mt-1">
-                        {cat.pct}% of total expense
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* TAB 2: SMART EQWUB & HIGH-YIELD POTS */}
-            {activeTab === "eqwub" && (
-              <motion.div
-                key="eqwub"
-                initial={{ opacity: 0, scale: 0.98, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.98, y: -15 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-              >
-                {/* Left side: Interactive Eqwub Simulator */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div>
-                    <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-1">
-                      Rotating Digital Eqwub Circle
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                      Automated Group Savings with Zero Default Risk.
-                    </h3>
-                    <p className="text-slate-400 text-sm mt-2 leading-relaxed">
-                      Invite family, colleagues, or join verified national circles. All rounds are backed by Dashen Bank escrow guarantee and auto-debited seamlessly.
-                    </p>
-                  </div>
-
-                  {/* Interactive Slider */}
-                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-                    <div className="flex justify-between items-center text-xs font-mono">
-                      <span className="text-slate-400">Monthly Contribution:</span>
-                      <span className="text-cyan-300 font-bold text-base">
-                        ETB {eqwubCycle.toLocaleString()} / mo
-                      </span>
-                    </div>
-
-                    <input
-                      type="range"
-                      min="2000"
-                      max="50000"
-                      step="2000"
-                      value={eqwubCycle}
-                      onChange={(e) => setEqwubCycle(Number(e.target.value))}
-                      className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-                    />
-
-                    <div className="flex justify-between text-[11px] text-slate-500 font-mono">
-                      <span>Min: ETB 2,000</span>
-                      <span>Max: ETB 50,000</span>
-                    </div>
-                  </div>
-
-                  {/* Projected Payout */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-blue-950/30 border border-blue-500/25">
-                      <span className="text-[11px] text-slate-400 font-mono">Lump Sum Payout</span>
-                      <div className="text-2xl font-black text-white font-mono mt-1">
-                        ETB {(eqwubCycle * 12).toLocaleString()}
-                      </div>
-                      <span className="text-[10px] text-cyan-400 font-mono">12-month rotation</span>
-                    </div>
-                    <div className="p-4 rounded-xl bg-cyan-950/30 border border-cyan-500/25">
-                      <span className="text-[11px] text-slate-400 font-mono">Escrow Protection</span>
-                      <div className="text-2xl font-black text-emerald-400 font-mono mt-1">
-                        100% Guaranteed
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-mono">NBE Regulated</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right side: Live Circle Roster */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-black/40 border border-white/10 space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                    <div className="text-xs font-bold text-white">Active Circle: Addis Tech Innovators</div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
-                      Round 4/12
-                    </span>
-                  </div>
-
-                  <div className="space-y-2.5">
-                    {[
-                      { name: "Abebe Kebede", date: "Aug 01, 2026", status: "Paid Out (ETB 120k)", current: false },
-                      { name: "Sara Tesfaye", date: "Sep 01, 2026", status: "Paid Out (ETB 120k)", current: false },
-                      { name: "You (Dawit M.)", date: "Oct 01, 2026", status: "NEXT IN LINE", current: true },
-                      { name: "Yonas Haile", date: "Nov 01, 2026", status: "Scheduled", current: false },
-                    ].map((m, i) => (
-                      <div
-                        key={i}
-                        className={`p-3 rounded-xl flex items-center justify-between text-xs font-mono ${
-                          m.current
-                            ? "bg-blue-600/20 border border-blue-400/40 text-white font-bold"
-                            : "bg-white/[0.02] border border-white/[0.05] text-slate-400"
-                        }`}
-                      >
-                        <div>
-                          <div className={m.current ? "text-cyan-300" : "text-slate-200"}>{m.name}</div>
-                          <div className="text-[10px] text-slate-500">{m.date}</div>
-                        </div>
-                        <span className={m.current ? "text-emerald-400 font-bold" : "text-slate-400"}>
-                          {m.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* TAB 3: PREDICTIVE BILL GUARD */}
-            {activeTab === "guard" && (
-              <motion.div
-                key="guard"
-                initial={{ opacity: 0, scale: 0.98, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.98, y: -15 }}
-                transition={{ duration: 0.4 }}
-                className="space-y-6"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  {[
-                    {
-                      title: "EEU Electric Utility",
-                      due: "Due in 3 days",
-                      amount: "ETB 1,450.00",
-                      action: "Auto-Debit Scheduled",
-                      safe: true,
-                    },
-                    {
-                      title: "Ethio Telecom Fiber 50Mbps",
-                      due: "Due in 7 days",
-                      amount: "ETB 2,800.00",
-                      action: "Zero Fee Active",
-                      safe: true,
-                    },
-                    {
-                      title: "Water & Sewage Authority",
-                      due: "Due in 12 days",
-                      amount: "ETB 420.00",
-                      action: "Direct Clearance",
-                      safe: true,
-                    },
-                  ].map((bill, i) => (
-                    <div
-                      key={i}
-                      className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:border-blue-500/30 transition-all flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
-                          <span>{bill.due}</span>
-                          <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                        </div>
-                        <h4 className="text-base font-bold text-white">{bill.title}</h4>
-                        <div className="text-2xl font-black text-cyan-300 font-mono mt-3">
-                          {bill.amount}
-                        </div>
-                      </div>
-
-                      <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-slate-400 font-mono">
-                        <span className="text-emerald-400 flex items-center gap-1">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          {bill.action}
-                        </span>
-                        <span className="text-slate-500">1-Tap Proof</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* ── Carousel Pagination Dots ───────────────── */}
+        <div className="flex items-center justify-center gap-2.5 mt-8">
+          {FINANCE_CARDS.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                activeIndex === idx
+                  ? "w-8 bg-amber-400 shadow-md shadow-amber-400/40"
+                  : "w-2 bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </SectionWrapper>
