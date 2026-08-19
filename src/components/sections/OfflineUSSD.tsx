@@ -3,15 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  WifiOff,
-  ShieldCheck,
   CheckCircle2,
-  Zap,
-  PhoneCall,
-  Radio,
-  Lock,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { BorderBeam } from "@/components/ui/BorderBeam";
@@ -26,7 +19,7 @@ export const OfflineUSSD = () => {
         {/* ── Section header ─────────────────────────── */}
         <div
           className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-16 mb-20"
+                        border-b border-slate-200 dark:border-white/[0.06] pb-16 mb-20"
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -34,12 +27,12 @@ export const OfflineUSSD = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
           >
-            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.35em] font-semibold">
               Offline USSD Protocol
             </span>
             <h2
-              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]"
+              className="mt-4 text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter
+                           uppercase leading-[0.85] transition-colors"
             >
               No Data.
               <br />
@@ -52,7 +45,7 @@ export const OfflineUSSD = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.12 }}
-            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+            className="max-w-xs text-slate-600 dark:text-slate-400 font-mono text-xs leading-relaxed
                        uppercase tracking-widest md:text-right"
           >
             Network blackouts never interrupt your life. Dashen SuperApp
@@ -62,7 +55,7 @@ export const OfflineUSSD = () => {
         </div>
 
         {/* FULL-WIDTH INTERACTIVE FAILSAFE SIMULATOR STAGE */}
-        <div className="relative rounded-[36px] bg-gradient-to-b from-[#0a1122]/90 via-[#070b16]/90 to-[#04070e]/95 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden">
+        <div className="relative rounded-[36px] bg-white/95 dark:bg-gradient-to-b dark:from-[#0a1122]/90 dark:via-[#070b16]/90 dark:to-[#04070e]/95 border border-slate-200/90 dark:border-white/15 p-6 sm:p-10 lg:p-12 shadow-xl shadow-slate-900/5 dark:shadow-2xl backdrop-blur-2xl overflow-hidden transition-colors">
           <BorderBeam
             size={320}
             duration={14}
@@ -77,13 +70,13 @@ export const OfflineUSSD = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             {/* Left Column: Quick Scenarios & Live Status */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="p-5 rounded-2xl bg-blue-950/30 border border-blue-500/25 flex items-center justify-between">
+              <div className="p-5 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-500/25 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div>
-                    <div className="text-xs font-mono text-slate-400">
+                    <div className="text-xs font-mono text-slate-500 dark:text-slate-400">
                       Cellular 4G Status
                     </div>
-                    <div className="text-sm font-bold text-white font-mono">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white font-mono">
                       Signal Unavailable (Offline)
                     </div>
                   </div>
@@ -91,7 +84,7 @@ export const OfflineUSSD = () => {
               </div>
 
               <div>
-                <span className="text-xs font-mono text-slate-400 uppercase tracking-widest block mb-3">
+                <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase tracking-widest block mb-3 font-semibold">
                   Select Interactive Offline Scenario:
                 </span>
 
@@ -100,17 +93,17 @@ export const OfflineUSSD = () => {
                     {
                       id: "transfer",
                       title: "1. Instant Interbank Transfer",
-                      detail: "",
+                      detail: "Routes automatically via *996*1#",
                     },
                     {
                       id: "telebirr",
                       title: "2. Telebirr Interop Payment",
-                      detail: "",
+                      detail: "Direct bridge to Telebirr wallet",
                     },
                     {
                       id: "airtime",
                       title: "3. Emergency Airtime Top-Up",
-                      detail: "",
+                      detail: "Zero-balance telecom recharge",
                     },
                   ].map((sc) => (
                     <button
@@ -121,18 +114,22 @@ export const OfflineUSSD = () => {
                       }}
                       className={`w-full p-4 rounded-xl text-left border transition-all cursor-pointer flex items-center justify-between ${
                         activeScenario === sc.id
-                          ? "bg-blue-600/20 border-cyan-400/50 text-white shadow-lg"
-                          : "bg-white/[0.02] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.04]"
+                          ? "bg-blue-50 dark:bg-blue-600/20 border-blue-500 dark:border-cyan-400/50 text-blue-950 dark:text-white shadow-md"
+                          : "bg-slate-50 dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]"
                       }`}
                     >
                       <div>
                         <div className="text-sm font-bold">{sc.title}</div>
-                        <div className="text-xs text-slate-400 font-mono mt-0.5">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                           {sc.detail}
                         </div>
                       </div>
                       <ArrowRight
-                        className={`w-4 h-4 ${activeScenario === sc.id ? "text-cyan-300" : "text-slate-600"}`}
+                        className={`w-4 h-4 ${
+                          activeScenario === sc.id
+                            ? "text-blue-600 dark:text-cyan-300"
+                            : "text-slate-400 dark:text-slate-600"
+                        }`}
                       />
                     </button>
                   ))}
@@ -142,7 +139,7 @@ export const OfflineUSSD = () => {
 
             {/* Right Column: High-Tech USSD Phone Screen Simulator */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="w-full max-w-md rounded-3xl bg-[#060a14] border border-cyan-500/30 p-6 shadow-2xl space-y-4">
+              <div className="w-full max-w-md rounded-3xl bg-slate-950 dark:bg-[#060a14] border border-cyan-500/30 p-6 shadow-2xl space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
@@ -242,7 +239,7 @@ export const OfflineUSSD = () => {
                       className={`py-2 text-xs rounded-xl border font-mono font-bold transition-all cursor-pointer ${
                         dialStep === s.step
                           ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50"
-                          : "bg-slate-900/80 text-slate-400 border-white/10 hover:text-white"
+                          : "bg-slate-900 text-slate-400 border-white/10 hover:text-white"
                       }`}
                     >
                       {s.label}

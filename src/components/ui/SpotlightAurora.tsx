@@ -42,8 +42,8 @@ export const SpotlightAurora = () => {
           }}
           className="absolute right-1/2 h-56 overflow-visible w-[30rem] bg-gradient-conic from-cyan-500 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
         >
-          <div className="absolute w-[100%] left-0 bg-[#050811] h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          <div className="absolute w-40 h-[100%] left-0 bg-[#050811] bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+          <div className="absolute w-[100%] left-0 bg-[#F8F6F0] dark:bg-[#050811] h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)] transition-colors duration-300" />
+          <div className="absolute w-40 h-[100%] left-0 bg-[#F8F6F0] dark:bg-[#050811] bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)] transition-colors duration-300" />
         </motion.div>
 
         {/* Right Lamp Beam */}
@@ -60,8 +60,8 @@ export const SpotlightAurora = () => {
           }}
           className="absolute left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-blue-500 text-white [--conic-position:from_290deg_at_center_top]"
         >
-          <div className="absolute w-40 h-[100%] right-0 bg-[#050811] bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
-          <div className="absolute w-[100%] right-0 bg-[#050811] h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+          <div className="absolute w-40 h-[100%] right-0 bg-[#F8F6F0] dark:bg-[#050811] bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)] transition-colors duration-300" />
+          <div className="absolute w-[100%] right-0 bg-[#F8F6F0] dark:bg-[#050811] h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)] transition-colors duration-300" />
         </motion.div>
 
         {/* Central Intense Horizontal Laser Beam Line */}
@@ -75,25 +75,25 @@ export const SpotlightAurora = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-44 w-[42rem] h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_30px_#06b6d4]"
+          className="absolute top-44 w-[42rem] h-0.5 bg-gradient-to-r from-transparent via-cyan-500 dark:via-cyan-400 to-transparent shadow-[0_0_30px_#06b6d4]"
         />
 
         {/* Glowing Lamp Core Sphere */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.6, 0.95, 0.6],
+            opacity: [0.4, 0.8, 0.4],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-28 w-80 h-36 bg-cyan-500 rounded-full blur-[80px]"
+          className="absolute top-28 w-80 h-36 bg-cyan-400/60 dark:bg-cyan-500 rounded-full blur-[80px]"
         />
 
         {/* Deep Blue Lower Backdrop Glow */}
-        <div className="absolute top-36 w-[55rem] h-56 bg-blue-600/30 rounded-full blur-[100px]" />
+        <div className="absolute top-36 w-[55rem] h-56 bg-blue-500/20 dark:bg-blue-600/30 rounded-full blur-[100px]" />
       </div>
 
       {/* 2. DYNAMIC CURSOR-TRACKING SPOTLIGHT (Bright & Visible) */}
@@ -102,57 +102,56 @@ export const SpotlightAurora = () => {
           left: springX,
           top: springY,
         }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-gradient-to-r from-blue-500/30 via-cyan-400/25 to-indigo-500/20 blur-[100px] transition-opacity duration-200"
+        className="absolute -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-gradient-to-r from-blue-500/15 dark:from-blue-500/30 via-cyan-400/15 dark:via-cyan-400/25 to-indigo-500/10 dark:to-indigo-500/20 blur-[100px] transition-opacity duration-200"
       />
 
       {/* 3. VIBRANT PULSING AURA BEHIND THE DASHBOARD & HEADLINE */}
       <motion.div
         animate={{
           scale: [0.95, 1.1, 0.95],
-          opacity: [0.5, 0.8, 0.5],
+          opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
           duration: 6,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-gradient-to-tr from-blue-600/35 via-cyan-500/25 to-indigo-600/30 rounded-full blur-[120px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-gradient-to-tr from-blue-500/20 dark:from-blue-600/35 via-cyan-400/15 dark:via-cyan-500/25 to-indigo-500/15 dark:to-indigo-600/30 rounded-full blur-[120px]"
       />
 
       {/* 4. LATERAL NEON GLOW ORBS (Left & Right Flanks) */}
       <motion.div
         animate={{
           y: [-20, 20, -20],
-          opacity: [0.4, 0.7, 0.4],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-1/3 -left-32 w-[500px] h-[500px] bg-blue-600/35 rounded-full blur-[130px]"
+        className="absolute top-1/3 -left-32 w-[500px] h-[500px] bg-blue-500/20 dark:bg-blue-600/35 rounded-full blur-[130px]"
       />
 
       <motion.div
         animate={{
           y: [20, -20, 20],
-          opacity: [0.4, 0.7, 0.4],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-1/2 -right-32 w-[500px] h-[500px] bg-cyan-500/35 rounded-full blur-[130px]"
+        className="absolute top-1/2 -right-32 w-[500px] h-[500px] bg-cyan-400/20 dark:bg-cyan-500/35 rounded-full blur-[130px]"
       />
 
       {/* 5. VIBRANT MOVING LASER PATHS WITH TRAVELING LIGHT BEAMS */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-80"
+        className="absolute inset-0 w-full h-full opacity-60 dark:opacity-80"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Neon Gradients */}
           <linearGradient id="laser-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
             <stop offset="50%" stopColor="#38bdf8" stopOpacity="1" />
@@ -165,7 +164,6 @@ export const SpotlightAurora = () => {
             <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
           </linearGradient>
 
-          {/* Glow Filter */}
           <filter id="laser-glow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="4" result="glow" />
             <feMerge>
@@ -175,16 +173,15 @@ export const SpotlightAurora = () => {
           </filter>
         </defs>
 
-        {/* Ambient Grid Guide Rays with High-Vis Glowing Strokes */}
         <motion.path
           d="M -100 240 Q 400 60 960 420 T 2000 280"
           fill="none"
           stroke="url(#laser-grad-1)"
-          strokeWidth="2.5"
+          strokeWidth="2"
           filter="url(#laser-glow)"
           animate={{
             pathOffset: [0, 1],
-            opacity: [0.4, 0.95, 0.4],
+            opacity: [0.3, 0.8, 0.3],
           }}
           transition={{
             duration: 8,
@@ -197,11 +194,11 @@ export const SpotlightAurora = () => {
           d="M 2100 120 Q 1350 500 720 200 T -200 620"
           fill="none"
           stroke="url(#laser-grad-2)"
-          strokeWidth="2.5"
+          strokeWidth="2"
           filter="url(#laser-glow)"
           animate={{
             pathOffset: [1, 0],
-            opacity: [0.35, 0.9, 0.35],
+            opacity: [0.25, 0.7, 0.25],
           }}
           transition={{
             duration: 10,

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { BorderBeam } from "@/components/ui/BorderBeam";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 interface LifestyleCardData {
   id: string;
@@ -96,7 +97,9 @@ const LifestyleStackLayer = ({
   total: number;
   smoothProgress: MotionValue<number>;
 }) => {
-  const [activeTheme, setActiveTheme] = useState<"dark" | "light">("dark");
+  const { theme, setTheme } = useTheme();
+  const activeTheme = theme;
+  const setActiveTheme = (t: "dark" | "light") => setTheme(t);
   const [selectedAirtime, setSelectedAirtime] = useState("300 ETB");
 
   const isLight = card.colorScheme === "light";
@@ -725,7 +728,7 @@ export const MiniApps = () => {
         {/* ── Section header ─────────────────────────── */}
         <div
           className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-12 mb-10"
+                        border-b border-slate-200 dark:border-white/[0.06] pb-12 mb-10"
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -733,12 +736,12 @@ export const MiniApps = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
           >
-            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.35em] font-semibold">
               Mini Apps Ecosystem
             </span>
             <h2
-              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]"
+              className="mt-4 text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter
+                           uppercase leading-[0.85] transition-colors"
             >
               One App.
               <br />
@@ -751,7 +754,7 @@ export const MiniApps = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.12 }}
-            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+            className="max-w-xs text-slate-600 dark:text-slate-400 font-mono text-xs leading-relaxed
                        uppercase tracking-widest md:text-right"
           >
             Scroll to reveal how Dashen SuperApp unifies your theme preferences, 3-click shopping, flight tickets, instant airtime, and automated utility billing.

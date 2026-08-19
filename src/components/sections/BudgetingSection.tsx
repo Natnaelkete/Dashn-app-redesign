@@ -14,9 +14,6 @@ import {
   PieChart,
   Wallet,
   Clock,
-  CheckCircle2,
-  Lock,
-  Building,
 } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -53,7 +50,7 @@ const FINANCE_CARDS: FinanceCard[] = [
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-[10px] font-mono font-bold text-cyan-300">AI RADAR LIVE</span>
           </div>
-          <span className="text-[10px] font-mono text-slate-400 bg-white/10 px-2 py-0.5 rounded">
+          <span className="text-[10px] font-mono text-slate-300 bg-white/10 px-2 py-0.5 rounded">
             AUG 2026
           </span>
         </div>
@@ -272,7 +269,7 @@ export const BudgetingSection = () => {
         {/* ── Section Header ─────────────────────────── */}
         <div
           className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-12 mb-14"
+                        border-b border-slate-200 dark:border-white/[0.06] pb-12 mb-14"
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -280,12 +277,12 @@ export const BudgetingSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
           >
-            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.35em] font-semibold">
               AI Predictive Engine
             </span>
             <h2
-              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]"
+              className="mt-4 text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter
+                           uppercase leading-[0.85] transition-colors"
             >
               Every Birr.
               <br />
@@ -299,7 +296,7 @@ export const BudgetingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65, delay: 0.12 }}
-              className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+              className="max-w-xs text-slate-600 dark:text-slate-400 font-mono text-xs leading-relaxed
                          uppercase tracking-widest md:text-right"
             >
               Experience real-time AI spending velocity, NBE-regulated Eqwub escrow circles, and predictive bill clearance.
@@ -311,17 +308,17 @@ export const BudgetingSection = () => {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous card"
-                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 hover:border-amber-400/50 hover:bg-white/[0.08] text-white flex items-center justify-center transition-all cursor-pointer group"
+                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-all cursor-pointer group"
               >
-                <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform text-slate-300 group-hover:text-amber-400" />
+                <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform text-slate-600 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400" />
               </button>
               <button
                 type="button"
                 onClick={handleNext}
                 aria-label="Next card"
-                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 hover:border-amber-400/50 hover:bg-white/[0.08] text-white flex items-center justify-center transition-all cursor-pointer group"
+                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-all cursor-pointer group"
               >
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform text-slate-300 group-hover:text-amber-400" />
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform text-slate-600 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400" />
               </button>
             </div>
           </div>
@@ -393,10 +390,10 @@ export const BudgetingSection = () => {
                     damping: 28,
                   }}
                   onClick={() => setActiveIndex(index)}
-                  className={`absolute w-[310px] sm:w-[360px] md:w-[390px] h-[520px] sm:h-[550px] rounded-[28px] sm:rounded-[32px] overflow-hidden cursor-pointer transition-shadow duration-500 flex flex-col justify-between ${
+                  className={`absolute w-[310px] sm:w-[360px] md:w-[390px] h-[520px] sm:h-[550px] rounded-[28px] sm:rounded-[32px] overflow-hidden cursor-pointer transition-all duration-500 flex flex-col justify-between ${
                     isCenter
-                      ? "border-2 border-amber-400 bg-[#070c18] shadow-[0_30px_90px_-15px_rgba(245,158,11,0.25),0_20px_50px_-10px_rgba(0,0,0,0.9)]"
-                      : "border border-white/10 bg-[#090e1a] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] hover:opacity-85 hover:border-white/20"
+                      ? "border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#070c18] shadow-xl shadow-amber-500/10 dark:shadow-[0_30px_90px_-15px_rgba(245,158,11,0.25),0_20px_50px_-10px_rgba(0,0,0,0.9)]"
+                      : "border border-slate-200/90 dark:border-white/10 bg-slate-50 dark:bg-[#090e1a] shadow-md dark:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] hover:opacity-85 hover:border-slate-300 dark:hover:border-white/20"
                   }`}
                 >
                   {/* Top Image / Visual Display Area */}
@@ -417,27 +414,27 @@ export const BudgetingSection = () => {
                   </div>
 
                   {/* Bottom Text Content & Action Area */}
-                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between bg-gradient-to-b from-[#0a0f1d] to-[#050811]">
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between bg-gradient-to-b from-white to-[#FAF8F5] dark:from-[#0a0f1d] dark:to-[#050811]">
                     <div className="space-y-2.5">
                       <h3
                         className={`text-base sm:text-lg font-black tracking-tight leading-snug uppercase ${
-                          isCenter ? "text-white" : "text-slate-200"
+                          isCenter ? "text-slate-900 dark:text-white" : "text-slate-800 dark:text-slate-200"
                         }`}
                       >
                         {card.title}
                       </h3>
-                      <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
                         {card.description}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                    <div className="pt-4 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span
                           className={`text-xs font-bold font-mono tracking-wider transition-colors flex items-center gap-1.5 ${
                             isCenter
-                              ? "text-amber-400 group-hover:text-amber-300"
-                              : "text-slate-400"
+                              ? "text-amber-600 dark:text-amber-400 group-hover:text-amber-700 dark:group-hover:text-amber-300"
+                              : "text-slate-500 dark:text-slate-400"
                           }`}
                         >
                           <span>{card.ctaText}</span>
@@ -445,7 +442,7 @@ export const BudgetingSection = () => {
                         </span>
                       </div>
 
-                      <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                      <span className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                         {card.id === "eqwub"
                           ? "NBE ESCROW"
                           : card.id === "guard"
@@ -473,8 +470,8 @@ export const BudgetingSection = () => {
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                 activeIndex === idx
-                  ? "w-8 bg-amber-400 shadow-md shadow-amber-400/40"
-                  : "w-2 bg-white/20 hover:bg-white/40"
+                  ? "w-8 bg-amber-500 dark:bg-amber-400 shadow-md shadow-amber-500/30"
+                  : "w-2 bg-slate-300 dark:bg-white/20 hover:bg-slate-400 dark:hover:bg-white/40"
               }`}
             />
           ))}

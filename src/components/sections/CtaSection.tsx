@@ -14,31 +14,31 @@ export const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.21, 0.45, 0.27, 0.99] }}
-          className="relative rounded-[40px] bg-white/[0.025] border border-blue-500/20 p-8 sm:p-12 lg:p-14
-                     overflow-hidden shadow-2xl shadow-blue-500/[0.06]"
+          className="relative rounded-[40px] bg-white dark:bg-white/[0.025] border border-blue-500/30 dark:border-blue-500/20 p-8 sm:p-12 lg:p-14
+                     overflow-hidden shadow-xl shadow-blue-500/[0.04] dark:shadow-2xl dark:shadow-blue-500/[0.06] transition-colors"
         >
           {/* Inner glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[180px]
-                          bg-blue-600/15 blur-[100px] pointer-events-none" />
+                          bg-blue-500/10 dark:bg-blue-600/15 blur-[100px] pointer-events-none" />
           {/* Inner grid */}
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#0f172a_0px_1px,transparent_1px_36px)]
-                          opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(15,23,42,0.03)_0px_1px,transparent_1px_36px)] dark:bg-[repeating-linear-gradient(45deg,#0f172a_0px_1px,transparent_1px_36px)]
+                          opacity-40 dark:opacity-30 pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left */}
             <div className="lg:col-span-7 flex flex-col gap-6">
               <div>
-                <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.3em]">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.3em] font-semibold">
                   iOS & Android
                 </span>
-                <h2 className="mt-3 text-5xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9]">
+                <h2 className="mt-3 text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.9] transition-colors">
                   Start Banking
                   <br />
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
                     In 60 Seconds.
                   </span>
                 </h2>
-                <p className="mt-4 text-slate-500 text-sm leading-relaxed max-w-lg">
+                <p className="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-lg">
                   Download Dashen SuperApp and open your Fayda-verified account instantly. One app for all your daily banking, payments, and lifestyle services.
                 </p>
               </div>
@@ -63,13 +63,13 @@ export const CtaSection = () => {
                     href={store.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white/[0.05]
-                               hover:bg-white/[0.10] border border-white/10 hover:border-blue-500/30
-                               transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                    className="flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-white/[0.05]
+                               dark:hover:bg-white/[0.10] border border-slate-900 dark:border-white/10 hover:border-blue-500/40
+                               transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-md"
                   >
                     {store.icon}
                     <div>
-                      <div className="text-[9px] uppercase font-mono text-slate-600 tracking-widest">{store.sub}</div>
+                      <div className="text-[9px] uppercase font-mono text-slate-300 dark:text-slate-400 tracking-widest">{store.sub}</div>
                       <div className="text-sm font-black text-white leading-none">{store.label}</div>
                     </div>
                   </a>
@@ -84,15 +84,15 @@ export const CtaSection = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-col items-center gap-4 p-5 rounded-3xl bg-white/[0.03]
-                           border border-white/[0.08] shadow-xl"
+                className="flex flex-col items-center gap-4 p-5 rounded-3xl bg-slate-50 dark:bg-white/[0.03]
+                           border border-slate-200/90 dark:border-white/[0.08] shadow-xl"
               >
-                <div className="p-4 rounded-2xl bg-white">
-                  <QrCode className="w-28 h-28 text-[#03050b]" />
+                <div className="p-4 rounded-2xl bg-white shadow-sm border border-slate-100 dark:border-transparent">
+                  <QrCode className="w-28 h-28 text-slate-900 dark:text-[#03050b]" />
                 </div>
                 <div className="text-center">
-                  <div className="text-xs font-black text-white uppercase tracking-tight">Scan to Install</div>
-                  <div className="text-[10px] text-slate-600 font-mono mt-0.5">iOS 15+ · Android 9+</div>
+                  <div className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Scan to Install</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-500 font-mono mt-0.5">iOS 15+ · Android 9+</div>
                 </div>
               </motion.div>
             </div>

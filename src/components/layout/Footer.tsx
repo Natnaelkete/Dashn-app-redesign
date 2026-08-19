@@ -1,54 +1,51 @@
 import React from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
   Phone,
   Mail,
   MapPin,
-  Globe,
-  ArrowUpRight,
-  Sparkles,
-  Lock,
 } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
 
 export const Footer = () => {
   return (
-    <footer className="relative bg-[#04060a] border-t border-white/[0.08] pt-16 pb-12 overflow-hidden">
+    <footer className="relative bg-[#F2EFE8] dark:bg-[#04060a] border-t border-slate-200 dark:border-white/[0.08] pt-16 pb-12 overflow-hidden transition-colors duration-300">
       {/* Subtle background ambient glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/[0.08]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-200 dark:border-white/[0.08]">
           {/* Brand & Description */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-[1px]">
-                <div className="w-full h-full bg-[#090d16] rounded-[11px] flex items-center justify-center">
-                  <span className="text-xl font-black text-blue-400">D</span>
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-[1px] shadow-md">
+                <div className="w-full h-full bg-white dark:bg-[#090d16] rounded-[11px] flex items-center justify-center">
+                  <span className="text-xl font-black text-blue-600 dark:text-blue-400">D</span>
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-white tracking-tight">
+                <span className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
                   Dashen SuperApp
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                   Always One Step Ahead
                 </span>
               </div>
             </div>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+              The premier digital financial platform licensed and regulated by the National Bank of Ethiopia. Empowering 5.8M+ everyday lives and businesses nationwide.
+            </p>
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
               Platform
             </h4>
-            <ul className="flex flex-col gap-2.5 text-sm text-slate-400">
+            <ul className="flex flex-col gap-2.5 text-sm text-slate-600 dark:text-slate-400">
               <li>
                 <Link
                   href="#features"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Digital Onboarding
                 </Link>
@@ -56,10 +53,10 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#mini-apps"
-                  className="hover:text-blue-400 transition-colors flex items-center gap-1.5"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5"
                 >
                   Mini Apps Ecosystem
-                  <span className="text-[10px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] bg-blue-500/15 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded font-semibold">
                     Popular
                   </span>
                 </Link>
@@ -67,7 +64,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#budgeting"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   AI Smart Budgeting
                 </Link>
@@ -75,7 +72,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#ussd"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Offline USSD (*996#)
                 </Link>
@@ -83,7 +80,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="#security"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Security Architecture
                 </Link>
@@ -93,32 +90,32 @@ export const Footer = () => {
 
           {/* Lifestyle & Services */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
               Mini Services
             </h4>
-            <ul className="flex flex-col gap-2.5 text-sm text-slate-400">
+            <ul className="flex flex-col gap-2.5 text-sm text-slate-600 dark:text-slate-400">
               <li>
-                <span className="hover:text-blue-400 transition-colors cursor-pointer">
+                <span className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
                   Ethiopian Airlines Flights
                 </span>
               </li>
               <li>
-                <span className="hover:text-blue-400 transition-colors cursor-pointer">
+                <span className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
                   Ethio Telecom / Safaricom Airtime
                 </span>
               </li>
               <li>
-                <span className="hover:text-blue-400 transition-colors cursor-pointer">
+                <span className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
                   Digital Eqwub Saving Circles
                 </span>
               </li>
               <li>
-                <span className="hover:text-blue-400 transition-colors cursor-pointer">
+                <span className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
                   Utility Bills & EEU Power
                 </span>
               </li>
               <li>
-                <span className="hover:text-blue-400 transition-colors cursor-pointer">
+                <span className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
                   Cinema & Concert Tickets
                 </span>
               </li>
@@ -127,26 +124,26 @@ export const Footer = () => {
 
           {/* Contact & Support */}
           <div className="flex flex-col gap-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
               24/7 Support
             </h4>
-            <div className="flex flex-col gap-3 text-sm text-slate-400">
+            <div className="flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-400">
               <a
                 href="tel:+251115158000"
-                className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+                className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors"
               >
-                <Phone className="w-4 h-4 text-cyan-400" />
+                <Phone className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
                 <span>+251 11 515 8000</span>
               </a>
               <a
                 href="mailto:info@dashensuperapp.com"
-                className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+                className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors"
               >
-                <Mail className="w-4 h-4 text-cyan-400" />
+                <Mail className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0" />
                 <span>info@dashensuperapp.com</span>
               </a>
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                 <span>Dashen Bank HQ, Sudan Street, Addis Ababa, Ethiopia</span>
               </div>
             </div>
@@ -159,16 +156,16 @@ export const Footer = () => {
             © {new Date().getFullYear()} Dashen Bank S.C. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-slate-400 cursor-pointer">
+            <span className="hover:text-slate-800 dark:hover:text-slate-400 cursor-pointer transition-colors">
               Privacy Policy
             </span>
-            <span className="hover:text-slate-400 cursor-pointer">
+            <span className="hover:text-slate-800 dark:hover:text-slate-400 cursor-pointer transition-colors">
               Terms of Service
             </span>
-            <span className="hover:text-slate-400 cursor-pointer">
+            <span className="hover:text-slate-800 dark:hover:text-slate-400 cursor-pointer transition-colors">
               Security Center
             </span>
-            <span className="hover:text-slate-400 cursor-pointer">
+            <span className="hover:text-slate-800 dark:hover:text-slate-400 cursor-pointer transition-colors">
               Regulatory Disclosures
             </span>
           </div>

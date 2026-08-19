@@ -1,17 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ShieldCheck,
   Lock,
   Fingerprint,
   KeyRound,
-  ShieldAlert,
-  Zap,
   CheckCircle2,
-  Sparkles,
-  RefreshCw,
   Eye,
   EyeOff,
 } from "lucide-react";
@@ -60,7 +56,7 @@ export const SecuritySection = () => {
         {/* ── Section header ─────────────────────────── */}
         <div
           className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-16 mb-20"
+                        border-b border-slate-200 dark:border-white/[0.06] pb-16 mb-20"
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -68,12 +64,12 @@ export const SecuritySection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
           >
-            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.35em] font-semibold">
               Security Matrix
             </span>
             <h2
-              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]"
+              className="mt-4 text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter
+                           uppercase leading-[0.85] transition-colors"
             >
               Fortress
               <br />
@@ -86,7 +82,7 @@ export const SecuritySection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.12 }}
-            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+            className="max-w-xs text-slate-600 dark:text-slate-400 font-mono text-xs leading-relaxed
                        uppercase tracking-widest md:text-right"
           >
             Hardware-backed cryptographic security, biometric identity
@@ -96,7 +92,7 @@ export const SecuritySection = () => {
         </div>
 
         {/* FULL-WIDTH INTERACTIVE SECURITY COCKPIT */}
-        <div className="relative rounded-[36px] bg-gradient-to-b from-[#0a1122]/90 via-[#070b16]/90 to-[#04070e]/95 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden">
+        <div className="relative rounded-[36px] bg-white/95 dark:bg-gradient-to-b dark:from-[#0a1122]/90 dark:via-[#070b16]/90 dark:to-[#04070e]/95 border border-slate-200/90 dark:border-white/15 p-6 sm:p-10 lg:p-12 shadow-xl shadow-slate-900/5 dark:shadow-2xl backdrop-blur-2xl overflow-hidden transition-colors">
           <BorderBeam
             size={340}
             duration={12}
@@ -105,7 +101,7 @@ export const SecuritySection = () => {
           />
 
           {/* Background Ambient Aura */}
-          <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             {/* Left Column: 4 Defense Matrix Tiles */}
@@ -120,8 +116,8 @@ export const SecuritySection = () => {
                     onClick={() => setActivePillar(pillar.id)}
                     className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between group ${
                       isSelected
-                        ? "bg-blue-600/15 border-cyan-400/50 shadow-lg shadow-blue-500/10"
-                        : "bg-white/[0.02] border-white/[0.07] hover:bg-white/[0.04] hover:border-white/20"
+                        ? "bg-blue-50 dark:bg-blue-600/15 border-blue-500 dark:border-cyan-400/50 shadow-md shadow-blue-500/10"
+                        : "bg-slate-50 dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.07] hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20"
                     }`}
                   >
                     <div>
@@ -129,22 +125,22 @@ export const SecuritySection = () => {
                         <div
                           className={`w-10 h-10 rounded-xl flex items-center justify-center border ${
                             isSelected
-                              ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/30"
-                              : "bg-white/[0.04] text-slate-400 border-white/[0.08] group-hover:text-cyan-300"
+                              ? "bg-blue-500/20 dark:bg-cyan-500/20 text-blue-600 dark:text-cyan-300 border-blue-400/30 dark:border-cyan-400/30"
+                              : "bg-slate-100 dark:bg-white/[0.04] text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/[0.08] group-hover:text-blue-600 dark:group-hover:text-cyan-300"
                           }`}
                         >
                           <Icon className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 flex items-center gap-1">
+                        <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 flex items-center gap-1">
                           <CheckCircle2 className="w-3 h-3" />
                           ACTIVE
                         </span>
                       </div>
 
-                      <h3 className="text-sm font-bold text-white mb-0.5">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-0.5 transition-colors">
                         {pillar.title}
                       </h3>
-                      <div className="text-[11px] text-cyan-400 font-mono">
+                      <div className="text-[11px] text-cyan-700 dark:text-cyan-400 font-mono font-medium">
                         {pillar.subtitle}
                       </div>
                     </div>
@@ -155,7 +151,7 @@ export const SecuritySection = () => {
 
             {/* Right Column: Interactive 3D Card Vault & Freeze Simulator */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm rounded-3xl bg-[#060a14] border border-white/10 p-6 shadow-2xl space-y-5">
+              <div className="w-full max-w-sm rounded-3xl bg-slate-950 dark:bg-[#060a14] border border-white/10 p-6 shadow-2xl space-y-5">
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
                   <span className="text-xs font-mono text-slate-300">
                     Holographic Vault Control
@@ -234,7 +230,7 @@ export const SecuritySection = () => {
                   )}
                 </button>
 
-                <p className="text-[11px] text-slate-500 font-mono text-center">
+                <p className="text-[11px] text-slate-400 font-mono text-center">
                   Instant lock across all physical POS, online checkouts, and
                   international ATMs.
                 </p>

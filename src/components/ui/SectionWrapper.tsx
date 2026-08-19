@@ -50,7 +50,9 @@ export const SectionWrapper: React.FC<Props> = ({
     <section
       ref={sectionRef}
       id={id}
-      className={`relative ${overflow === "visible" ? "overflow-visible" : "overflow-hidden"} bg-[#03060f] ${className}`}
+      className={`relative ${
+        overflow === "visible" ? "overflow-visible" : "overflow-hidden"
+      } bg-[#F8F6F0] dark:bg-[#03060f] transition-colors duration-300 ${className}`}
     >
       {/* ── Section divider glow line ─────────────── */}
       <div
@@ -61,7 +63,7 @@ export const SectionWrapper: React.FC<Props> = ({
       {/* ── Futuristic Matrix Grid Background ─────── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 bg-grid-fintech opacity-25"
+        className="pointer-events-none absolute inset-0 z-0 bg-grid-fintech opacity-30 dark:opacity-25"
       />
 
       {/* ── Cursor-tracked spotlight ──────────────── */}
@@ -72,8 +74,8 @@ export const SectionWrapper: React.FC<Props> = ({
           style={{
             opacity: cursor.visible ? 1 : 0,
             background: `radial-gradient(700px circle at ${cursor.x}px ${cursor.y}px,
-              rgba(59,130,246,0.18) 0%,
-              rgba(34,211,238,0.10) 35%,
+              rgba(59,130,246,0.12) 0%,
+              rgba(34,211,238,0.06) 35%,
               transparent 75%)`,
           }}
         />
@@ -83,7 +85,7 @@ export const SectionWrapper: React.FC<Props> = ({
       {glow === "center" && (
         <div
           aria-hidden
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-transparent rounded-full blur-[180px] z-0 animate-pulse-glow"
+          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-tr from-blue-500/10 dark:from-blue-600/20 via-cyan-400/10 dark:via-cyan-500/15 to-transparent rounded-full blur-[180px] z-0 animate-pulse-glow"
         />
       )}
 
@@ -91,11 +93,11 @@ export const SectionWrapper: React.FC<Props> = ({
         <>
           <div
             aria-hidden
-            className="pointer-events-none absolute top-0 right-0 w-[700px] h-[500px] bg-blue-600/20 rounded-full blur-[180px] z-0 animate-drift"
+            className="pointer-events-none absolute top-0 right-0 w-[700px] h-[500px] bg-blue-500/10 dark:bg-blue-600/20 rounded-full blur-[180px] z-0 animate-drift"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute bottom-0 left-0 w-[550px] h-[450px] bg-cyan-500/15 rounded-full blur-[190px] z-0 animate-drift-slow"
+            className="pointer-events-none absolute bottom-0 left-0 w-[550px] h-[450px] bg-cyan-400/10 dark:bg-cyan-500/15 rounded-full blur-[190px] z-0 animate-drift-slow"
           />
         </>
       )}
@@ -104,11 +106,11 @@ export const SectionWrapper: React.FC<Props> = ({
         <>
           <div
             aria-hidden
-            className="pointer-events-none absolute top-0 left-0 w-[700px] h-[500px] bg-cyan-500/20 rounded-full blur-[180px] z-0 animate-drift"
+            className="pointer-events-none absolute top-0 left-0 w-[700px] h-[500px] bg-cyan-400/10 dark:bg-cyan-500/20 rounded-full blur-[180px] z-0 animate-drift"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute bottom-0 right-0 w-[600px] h-[450px] bg-blue-600/15 rounded-full blur-[190px] z-0 animate-drift-slow"
+            className="pointer-events-none absolute bottom-0 right-0 w-[600px] h-[450px] bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-[190px] z-0 animate-drift-slow"
           />
         </>
       )}
@@ -117,11 +119,11 @@ export const SectionWrapper: React.FC<Props> = ({
         <>
           <div
             aria-hidden
-            className="pointer-events-none absolute top-1/4 -left-20 w-[600px] h-[600px] bg-blue-600/25 rounded-full blur-[200px] z-0 animate-pulse-glow"
+            className="pointer-events-none absolute top-1/4 -left-20 w-[600px] h-[600px] bg-blue-500/15 dark:bg-blue-600/25 rounded-full blur-[200px] z-0 animate-pulse-glow"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[200px] z-0 animate-pulse-glow"
+            className="pointer-events-none absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-cyan-400/15 dark:bg-cyan-500/20 rounded-full blur-[200px] z-0 animate-pulse-glow"
           />
         </>
       )}
@@ -129,7 +131,7 @@ export const SectionWrapper: React.FC<Props> = ({
       {glow === "muted" && (
         <div
           aria-hidden
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/15 rounded-full blur-[190px] z-0"
+          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-500/10 dark:bg-blue-600/15 rounded-full blur-[190px] z-0"
         />
       )}
 

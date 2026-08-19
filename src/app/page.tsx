@@ -13,7 +13,7 @@ import { CtaSection } from "@/components/sections/CtaSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#050811] text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-[#F8F6F0] dark:bg-[#050811] text-slate-900 dark:text-slate-100 flex flex-col selection:bg-blue-600 selection:text-white transition-colors duration-300">
       {/* 1. Global High-Tech Glass Navigation */}
       <Navbar />
 

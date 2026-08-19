@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, sans-serif;
@@ -7,14 +9,34 @@
     /* Unified palette tokens */
     --c-blue:  59 130 246;   /* blue-500  */
     --c-cyan:  34 211 238;   /* cyan-400  */
+
+    /* Light Mode Cream / Off-White Palette */
+    --bg-base: #F8F6F0;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FCFAF6;
+    --border-color: rgba(15, 23, 42, 0.08);
+    --text-primary: #0F172A;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+  }
+
+  .dark {
+    --bg-base: #03050b;
+    --bg-surface: #0a1122;
+    --bg-card: #090e1b;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
   }
 }
 
 body {
-  background-color: #03050b;
-  color: #f1f5f9;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code, kbd, samp, pre, .font-mono {
@@ -78,15 +100,18 @@ code, kbd, samp, pre, .font-mono {
 
 /* ─── Section ambient layer ──────────────────────────────────── */
 
-/*
-  Wrap each section in .section-ambient to get the shared
-  diagonal noise pattern + gentle blue/cyan glow blobs.
-  The blobs are positioned via sibling divs; see SectionWrapper.
-*/
 .section-ambient {
   position: relative;
   overflow: hidden;
-  /* Very subtle diagonal noise */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(15, 23, 42, 0.03) 0px 1px,
+    transparent 1px 52px
+  );
+  background-color: #F8F6F0;
+}
+
+.dark .section-ambient {
   background-image: repeating-linear-gradient(
     45deg,
     #131b2e 0px 1px,
@@ -98,6 +123,17 @@ code, kbd, samp, pre, .font-mono {
 /* ─── Section divider glow line ─────────────────────────────── */
 .section-divider {
   height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(59, 130, 246, 0.25) 30%,
+    rgba(34, 211, 238, 0.4) 50%,
+    rgba(59, 130, 246, 0.25) 70%,
+    transparent
+  );
+}
+
+.dark .section-divider {
   background: linear-gradient(
     to right,
     transparent,
@@ -117,11 +153,26 @@ code, kbd, samp, pre, .font-mono {
 .bg-grid-fintech {
   background-size: 40px 40px;
   background-image:
+    linear-gradient(to right,  rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+.dark .bg-grid-fintech {
+  background-image:
     linear-gradient(to right,  rgba(255,255,255,0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
 }
 
 .bg-radial-gradient {
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(59,130,246,0.20)  0%,
+    rgba(34,211,238,0.10) 40%,
+    transparent            75%
+  );
+}
+
+.dark .bg-radial-gradient {
   background: radial-gradient(
     circle at 50% 0%,
     rgba(59,130,246,0.35)  0%,
@@ -131,12 +182,26 @@ code, kbd, samp, pre, .font-mono {
 }
 
 .glass-card-fintech {
-  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
 }
 .glass-card-fintech:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.80) 100%);
+  border-color: rgba(59,130,246,0.4);
+  box-shadow:
+    0 20px 45px -15px rgba(0,0,0,0.1),
+    0 0 35px -5px rgba(59,130,246,0.2);
+}
+
+.dark .glass-card-fintech {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: none;
+}
+.dark .glass-card-fintech:hover {
   background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
   border-color: rgba(34,211,238,0.4);
   box-shadow:
@@ -150,6 +215,16 @@ code, kbd, samp, pre, .font-mono {
     0deg,
     transparent,
     transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 4px
+  );
+}
+
+.dark .scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
     rgba(0,0,0,0.12) 2px,
     rgba(0,0,0,0.12) 4px
   );
@@ -157,6 +232,10 @@ code, kbd, samp, pre, .font-mono {
 
 /* ─── Custom scrollbar ───────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 6px; }
-::-webkit-scrollbar-track { background: #03050b; }
-::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: #334155; }
+::-webkit-scrollbar-track { background: #F8F6F0; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+.dark ::-webkit-scrollbar-track { background: #03050b; }
+.dark ::-webkit-scrollbar-thumb { background: #1e293b; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #334155; }

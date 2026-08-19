@@ -83,9 +83,10 @@ function FeatureCard({
         ref={cardRef}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
-        className="group relative rounded-3xl border border-white/[0.07] bg-white/[0.025]
+        className="group relative rounded-3xl border border-slate-200/90 dark:border-white/[0.07] bg-white dark:bg-white/[0.025]
                    overflow-hidden cursor-default transition-all duration-500
-                   hover:border-blue-500/30 hover:shadow-[0_0_80px_-20px_rgba(59,130,246,0.20)]
+                   shadow-sm dark:shadow-none hover:border-blue-500/40 dark:hover:border-blue-500/30
+                   hover:shadow-[0_15px_40px_-10px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_80px_-20px_rgba(59,130,246,0.20)]
                    h-full flex flex-col justify-between"
       >
         {/* Per-card cursor spotlight */}
@@ -111,23 +112,23 @@ function FeatureCard({
         <div className="relative z-10 p-8 sm:p-10 flex flex-col justify-between gap-8 h-full min-h-[260px]">
           {/* Top row: icon + label */}
           <div className="flex items-start justify-between">
-            <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.08]
+            <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/[0.08]
                             flex items-center justify-center transition-all duration-300
                             group-hover:bg-blue-500/10 group-hover:border-blue-500/20">
-              <feature.icon className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-colors duration-300" />
+              <feature.icon className="w-5 h-5 text-slate-700 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
             </div>
-            <span className="text-[10px] font-mono text-slate-700 uppercase tracking-[0.25em]
-                             group-hover:text-cyan-500 transition-colors duration-300">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.25em]
+                             group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300 font-semibold">
               {feature.label}
             </span>
           </div>
 
           {/* Bottom: text */}
           <div className="mt-auto">
-            <h3 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight leading-tight">
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight leading-tight transition-colors">
               {feature.title}
             </h3>
-            <p className="mt-3 text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed transition-colors">{feature.desc}</p>
           </div>
         </div>
       </div>
@@ -142,18 +143,18 @@ export const FeaturesGrid = () => {
 
         {/* ── Section header ─────────────────────────── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8
-                        border-b border-white/[0.06] pb-16 mb-20">
+                        border-b border-slate-200 dark:border-white/[0.06] pb-16 mb-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
           >
-            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-500 uppercase tracking-[0.35em] font-semibold">
               Core Architecture
             </span>
-            <h2 className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
-                           uppercase leading-[0.85]">
+            <h2 className="mt-4 text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter
+                           uppercase leading-[0.85] transition-colors">
               Built for
               <br />
               Ethiopia.
@@ -165,7 +166,7 @@ export const FeaturesGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.12 }}
-            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+            className="max-w-xs text-slate-600 dark:text-slate-400 font-mono text-xs leading-relaxed
                        uppercase tracking-widest md:text-right"
           >
             Every layer engineered for speed, offline resilience, and the Ethiopian market.
