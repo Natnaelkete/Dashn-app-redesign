@@ -55,9 +55,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} dark antialiased scroll-smooth`}
     >
-      <body className="min-h-screen bg-[#050811] text-slate-100 selection:bg-blue-600 selection:text-white flex flex-col font-sans overflow-x-hidden">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-[#050811] text-slate-100 selection:bg-blue-600 selection:text-white flex flex-col font-sans overflow-x-hidden"
+      >
         {children}
       </body>
     </html>

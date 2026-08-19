@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FAQ_ITEMS } from "@/data/mockData";
-import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { ChevronDown, Plus, Minus } from "lucide-react";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const FaqSection = () => {
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0].id);
@@ -14,49 +14,69 @@ export const FaqSection = () => {
   };
 
   return (
-    <section id="faq" className="py-24 bg-[#080d16] relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-14">
-          <Badge variant="cyan" className="mb-4">
-            <HelpCircle className="w-3 h-3 mr-1" />
-            Frequently Asked Questions
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Everything You Need to Know
-          </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
-            Got questions about Dashen SuperApp? Find answers to our most common inquiries below.
-          </p>
+    <SectionWrapper id="faq" glow="muted" className="py-32 sm:py-40">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* ── Section header ─────────────────────────── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8
+                        border-b border-white/[0.06] pb-16 mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
+          >
+            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+              Help & Support
+            </span>
+            <h2 className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
+                           uppercase leading-[0.85]">
+              Common
+              <br />
+              Questions.
+            </h2>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: 0.12 }}
+            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+                       uppercase tracking-widest md:text-right"
+          >
+            Everything you need to know about Fayda verification, offline USSD, security encryption, and daily transaction limits.
+          </motion.p>
         </div>
 
-        <div className="space-y-4">
+        {/* Modern Accordion List */}
+        <div className="max-w-4xl mx-auto space-y-4">
           {FAQ_ITEMS.map((item) => {
             const isOpen = openId === item.id;
 
             return (
               <div
                 key={item.id}
-                className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? "bg-[#0d1424] border-blue-500/40 shadow-lg shadow-blue-500/5"
-                    : "bg-[#0a0f1c]/70 border-white/[0.08] hover:border-white/15"
+                    ? "bg-gradient-to-b from-[#0a1122]/90 to-[#070b16]/90 border-cyan-400/40 shadow-xl shadow-blue-500/10"
+                    : "bg-white/[0.02] border-white/[0.07] hover:border-white/20 hover:bg-white/[0.04]"
                 }`}
               >
                 <button
                   onClick={() => toggleItem(item.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer"
+                  className="w-full p-6 sm:p-7 text-left flex items-center justify-between gap-6 cursor-pointer"
                 >
-                  <span className="text-base font-semibold text-slate-100">
+                  <span className="text-base sm:text-lg font-bold text-white tracking-tight">
                     {item.question}
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-200 ${
+                    className={`w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 border transition-all duration-300 ${
                       isOpen
-                        ? "rotate-180 bg-blue-500/20 text-blue-400 border-blue-500/30"
-                        : "bg-white/[0.05] text-slate-400 border-white/10"
+                        ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/40"
+                        : "bg-white/[0.04] text-slate-500 border-white/[0.08]"
                     }`}
                   >
-                    <ChevronDown className="w-4 h-4" />
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                   </div>
                 </button>
 
@@ -66,9 +86,9 @@ export const FaqSection = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={{ duration: 0.28 }}
                     >
-                      <div className="px-5 pb-5 pt-1 text-sm text-slate-400 leading-relaxed border-t border-white/[0.04]">
+                      <div className="px-6 sm:px-7 pb-6 text-sm text-slate-400 leading-relaxed border-t border-white/[0.06] pt-4">
                         {item.answer}
                       </div>
                     </motion.div>
@@ -79,6 +99,6 @@ export const FaqSection = () => {
           })}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };

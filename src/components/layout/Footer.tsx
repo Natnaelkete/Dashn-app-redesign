@@ -37,23 +37,6 @@ export const Footer = () => {
                 </span>
               </div>
             </div>
-
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Empowering everyday banking with innovation, reliability, and trust.
-              Dashen Bank delivers secure, lightning-fast digital lifestyle and
-              financial solutions across Ethiopia.
-            </p>
-
-            <div className="flex items-center gap-2 pt-2">
-              <Badge variant="emerald" className="gap-1.5 py-1">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                PCI-DSS Level 1 Certified
-              </Badge>
-              <Badge variant="outline" className="gap-1.5 py-1">
-                <Lock className="w-3.5 h-3.5 text-slate-400" />
-                256-Bit Encrypted
-              </Badge>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -63,12 +46,18 @@ export const Footer = () => {
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm text-slate-400">
               <li>
-                <Link href="#features" className="hover:text-blue-400 transition-colors">
+                <Link
+                  href="#features"
+                  className="hover:text-blue-400 transition-colors"
+                >
                   Digital Onboarding
                 </Link>
               </li>
               <li>
-                <Link href="#mini-apps" className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <Link
+                  href="#mini-apps"
+                  className="hover:text-blue-400 transition-colors flex items-center gap-1.5"
+                >
                   Mini Apps Ecosystem
                   <span className="text-[10px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded">
                     Popular
@@ -76,17 +65,26 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#budgeting" className="hover:text-blue-400 transition-colors">
+                <Link
+                  href="#budgeting"
+                  className="hover:text-blue-400 transition-colors"
+                >
                   AI Smart Budgeting
                 </Link>
               </li>
               <li>
-                <Link href="#ussd" className="hover:text-blue-400 transition-colors">
+                <Link
+                  href="#ussd"
+                  className="hover:text-blue-400 transition-colors"
+                >
                   Offline USSD (*996#)
                 </Link>
               </li>
               <li>
-                <Link href="#security" className="hover:text-blue-400 transition-colors">
+                <Link
+                  href="#security"
+                  className="hover:text-blue-400 transition-colors"
+                >
                   Security Architecture
                 </Link>
               </li>
@@ -157,12 +155,22 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} Dashen Bank S.C. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Dashen Bank S.C. All rights reserved.
+          </p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>
-            <span className="hover:text-slate-400 cursor-pointer">Security Center</span>
-            <span className="hover:text-slate-400 cursor-pointer">Regulatory Disclosures</span>
+            <span className="hover:text-slate-400 cursor-pointer">
+              Privacy Policy
+            </span>
+            <span className="hover:text-slate-400 cursor-pointer">
+              Terms of Service
+            </span>
+            <span className="hover:text-slate-400 cursor-pointer">
+              Security Center
+            </span>
+            <span className="hover:text-slate-400 cursor-pointer">
+              Regulatory Disclosures
+            </span>
           </div>
         </div>
       </div>

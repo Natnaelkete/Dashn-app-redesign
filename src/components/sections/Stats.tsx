@@ -1,48 +1,43 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { APP_METRICS } from "@/data/mockData";
-import { TrendingUp, ShieldCheck, Zap, Layers } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+
+const STATS = [
+  { value: "5.8M+",    label: "Active Users",      sub: "Across Ethiopia" },
+  { value: "ETB 2.1T", label: "Annual Volume",      sub: "Processed securely" },
+  { value: "0.8s",     label: "Avg. Settlement",    sub: "Near-instant transfers" },
+  { value: "99.99%",   label: "Platform Uptime",    sub: "NBE-regulated resilience" },
+];
 
 export const Stats = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
-    <section className="relative py-16 bg-[#080d16] border-y border-white/[0.08] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {APP_METRICS.map((metric, index) => (
+    <SectionWrapper glow="muted" className="py-24">
+      <div ref={ref} className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06]">
+          {STATS.map((stat, i) => (
             <motion.div
-              key={metric.label}
+              key={stat.label}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative p-6 rounded-2xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] hover:border-blue-500/30 transition-all duration-300 group"
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.21, 0.45, 0.27, 0.99] }}
+              className="px-6 py-10 text-center group"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  {metric.label}
-                </span>
-                {metric.growth && (
-                  <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    {metric.growth}
-                  </span>
-                )}
+              <div className="text-4xl sm:text-5xl font-black text-white font-mono tracking-tighter
+                              group-hover:bg-gradient-to-br group-hover:from-blue-400 group-hover:to-cyan-300
+                              group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                {stat.value}
               </div>
-
-              <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight mb-2 group-hover:text-blue-400 transition-colors">
-                {metric.prefix}
-                {metric.value}
-                {metric.suffix}
-              </div>
-
-              <p className="text-xs text-slate-400 leading-relaxed">
-                {metric.description}
-              </p>
+              <div className="mt-2 text-sm font-semibold text-slate-300">{stat.label}</div>
+              <div className="mt-0.5 text-xs text-slate-600">{stat.sub}</div>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };

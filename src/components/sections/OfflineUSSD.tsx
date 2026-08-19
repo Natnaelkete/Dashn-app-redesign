@@ -1,178 +1,259 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   WifiOff,
-  PhoneCall,
   ShieldCheck,
   CheckCircle2,
   Zap,
-  Globe,
+  PhoneCall,
+  Radio,
   Lock,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { BorderBeam } from "@/components/ui/BorderBeam";
 
 export const OfflineUSSD = () => {
   const [dialStep, setDialStep] = useState<number>(1);
+  const [activeScenario, setActiveScenario] = useState<string>("transfer");
 
   return (
-    <section id="ussd" className="py-24 bg-[#06090e] relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none" />
+    <SectionWrapper id="ussd" glow="blue" className="py-32 sm:py-40">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* ── Section header ─────────────────────────── */}
+        <div
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8
+                        border-b border-white/[0.06] pb-16 mb-20"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
+          >
+            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+              Offline USSD Protocol
+            </span>
+            <h2
+              className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
+                           uppercase leading-[0.85]"
+            >
+              No Data.
+              <br />
+              Still Banking.
+            </h2>
+          </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Interactive USSD Simulation Phone Screen */}
-          <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center">
-            <div className="relative w-full max-w-sm rounded-[32px] bg-[#0c1322] border border-amber-500/30 p-6 shadow-2xl shadow-amber-500/5">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <WifiOff className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs font-mono text-amber-300">
-                    Offline Mode Active
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: 0.12 }}
+            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+                       uppercase tracking-widest md:text-right"
+          >
+            Network blackouts never interrupt your life. Dashen SuperApp
+            seamlessly switches to automated USSD protocol for instant transfers
+            anywhere in Ethiopia.
+          </motion.p>
+        </div>
+
+        {/* FULL-WIDTH INTERACTIVE FAILSAFE SIMULATOR STAGE */}
+        <div className="relative rounded-[36px] bg-gradient-to-b from-[#0a1122]/90 via-[#070b16]/90 to-[#04070e]/95 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden">
+          <BorderBeam
+            size={320}
+            duration={14}
+            colorFrom="#38bdf8"
+            colorTo="#3b82f6"
+          />
+
+          {/* Background Radar Rings */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-cyan-500/10 pointer-events-none animate-ping [animation-duration:6s]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-blue-500/15 pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            {/* Left Column: Quick Scenarios & Live Status */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="p-5 rounded-2xl bg-blue-950/30 border border-blue-500/25 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div>
+                    <div className="text-xs font-mono text-slate-400">
+                      Cellular 4G Status
+                    </div>
+                    <div className="text-sm font-bold text-white font-mono">
+                      Signal Unavailable (Offline)
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-xs font-mono text-slate-400 uppercase tracking-widest block mb-3">
+                  Select Interactive Offline Scenario:
+                </span>
+
+                <div className="space-y-2.5">
+                  {[
+                    {
+                      id: "transfer",
+                      title: "1. Instant Interbank Transfer",
+                      detail: "",
+                    },
+                    {
+                      id: "telebirr",
+                      title: "2. Telebirr Interop Payment",
+                      detail: "",
+                    },
+                    {
+                      id: "airtime",
+                      title: "3. Emergency Airtime Top-Up",
+                      detail: "",
+                    },
+                  ].map((sc) => (
+                    <button
+                      key={sc.id}
+                      onClick={() => {
+                        setActiveScenario(sc.id);
+                        setDialStep(1);
+                      }}
+                      className={`w-full p-4 rounded-xl text-left border transition-all cursor-pointer flex items-center justify-between ${
+                        activeScenario === sc.id
+                          ? "bg-blue-600/20 border-cyan-400/50 text-white shadow-lg"
+                          : "bg-white/[0.02] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.04]"
+                      }`}
+                    >
+                      <div>
+                        <div className="text-sm font-bold">{sc.title}</div>
+                        <div className="text-xs text-slate-400 font-mono mt-0.5">
+                          {sc.detail}
+                        </div>
+                      </div>
+                      <ArrowRight
+                        className={`w-4 h-4 ${activeScenario === sc.id ? "text-cyan-300" : "text-slate-600"}`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: High-Tech USSD Phone Screen Simulator */}
+            <div className="lg:col-span-6 flex justify-center">
+              <div className="w-full max-w-md rounded-3xl bg-[#060a14] border border-cyan-500/30 p-6 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+                    <span className="text-xs font-mono text-slate-300">
+                      Live USSD Session (*996#)
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2.5 py-0.5 rounded-full border border-cyan-500/20">
+                    Encrypted
                   </span>
                 </div>
-                <span className="text-xs font-mono font-bold text-slate-300">
-                  *996#
-                </span>
-              </div>
 
-              {/* USSD Modal Screen Dialog */}
-              <div className="my-6 p-5 rounded-2xl bg-black/80 border border-amber-500/40 font-mono text-xs text-amber-300 space-y-3">
-                <div className="flex items-center justify-between text-white font-bold border-b border-amber-500/20 pb-2">
-                  <span>DASHEN BANK (*996#)</span>
-                  <span className="text-[10px] text-emerald-400">ENCRYPTED</span>
+                {/* USSD Dialog Screen */}
+                <div className="p-5 rounded-2xl bg-black/90 border border-cyan-500/30 font-mono text-xs text-cyan-300 space-y-3 min-h-[220px] flex flex-col justify-between">
+                  <div className="flex items-center justify-between text-white font-bold border-b border-cyan-500/20 pb-2 text-[11px]">
+                    <span>DASHEN SUPERAPP FAILSAFE</span>
+                    <span className="text-[10px] text-emerald-400">
+                      0.8s SLA
+                    </span>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    {dialStep === 1 && (
+                      <motion.div
+                        key="step1"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="space-y-1.5 text-slate-200"
+                      >
+                        <div className="text-cyan-300 font-bold">
+                          1. Transfer to Dashen / Interbank
+                        </div>
+                        <div>2. Telebirr Interoperability</div>
+                        <div>3. Airtime & 5G Bundles</div>
+                        <div>4. Balance & Mini-Statement</div>
+                        <div className="text-cyan-400 font-bold pt-2">
+                          Option Selected: [ 1 ] ➔ Next
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {dialStep === 2 && (
+                      <motion.div
+                        key="step2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="space-y-1.5 text-slate-200"
+                      >
+                        <div className="text-cyan-300 font-bold">
+                          AUTHORIZE PAYMENT:
+                        </div>
+                        <div>Recipient: Abebe Kebede</div>
+                        <div>Amount: ETB 1,500.00</div>
+                        <div>Fee: ETB 0.00 (Instant)</div>
+                        <div className="text-cyan-400 font-bold pt-2">
+                          Enter PIN: [ • • • • ]
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {dialStep === 3 && (
+                      <motion.div
+                        key="step3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="space-y-2 text-emerald-400"
+                      >
+                        <div className="flex items-center gap-1.5 font-bold text-sm">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span>TRANSFER CONFIRMED!</span>
+                        </div>
+                        <div className="text-slate-300 text-xs leading-relaxed">
+                          Ref: DSH-996-883492 <br />
+                          Recipient: Abebe Kebede <br />
+                          New Balance: ETB 141,350.50
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="text-[10px] text-slate-500 border-t border-cyan-500/20 pt-2 flex justify-between">
+                    <span>Session ID: 996-8823</span>
+                    <span>Status: Verified</span>
+                  </div>
                 </div>
 
-                {dialStep === 1 && (
-                  <div className="space-y-1.5 text-slate-200">
-                    <div>1. Transfer to Dashen / Other Bank</div>
-                    <div>2. Telebirr Interop Pay</div>
-                    <div>3. Buy Airtime / Data</div>
-                    <div>4. Check Balance & Mini-Statement</div>
-                    <div>5. Pay Merchant / Utility</div>
-                    <div className="pt-2 text-amber-400 font-bold">
-                      Enter option [1-5]:
-                    </div>
-                  </div>
-                )}
-
-                {dialStep === 2 && (
-                  <div className="space-y-1.5 text-slate-200">
-                    <div className="text-emerald-400">Transfer Confirmation:</div>
-                    <div>Recipient: Abebe Kebede</div>
-                    <div>Amount: ETB 1,500.00</div>
-                    <div>Fee: ETB 0.00 (Instant)</div>
-                    <div className="pt-2 text-amber-400 font-bold">
-                      Enter 4-digit PIN to authorize:
-                    </div>
-                  </div>
-                )}
-
-                {dialStep === 3 && (
-                  <div className="space-y-1.5 text-emerald-400">
-                    <div className="flex items-center gap-1.5 font-bold">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>Transaction Successful!</span>
-                    </div>
-                    <div className="text-slate-300 text-[11px]">
-                      Tx ID: DSH-996-883492
-                      <br />
-                      New Balance: ETB 141,350.50
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Interactive Simulation Switchers */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setDialStep(1)}
-                  className={`flex-1 py-2 text-xs rounded-xl border transition-colors ${
-                    dialStep === 1
-                      ? "bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold"
-                      : "bg-slate-900 text-slate-400 border-white/10"
-                  }`}
-                >
-                  Step 1: Menu
-                </button>
-                <button
-                  onClick={() => setDialStep(2)}
-                  className={`flex-1 py-2 text-xs rounded-xl border transition-colors ${
-                    dialStep === 2
-                      ? "bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold"
-                      : "bg-slate-900 text-slate-400 border-white/10"
-                  }`}
-                >
-                  Step 2: PIN
-                </button>
-                <button
-                  onClick={() => setDialStep(3)}
-                  className={`flex-1 py-2 text-xs rounded-xl border transition-colors ${
-                    dialStep === 3
-                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-bold"
-                      : "bg-slate-900 text-slate-400 border-white/10"
-                  }`}
-                >
-                  Step 3: Receipt
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Narrative & Technical Advantage */}
-          <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col gap-6">
-            <div>
-              <Badge variant="amber" className="mb-4">
-                <Zap className="w-3 h-3 mr-1" />
-                Zero-Downtime Guarantee
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                No 4G? No Wi-Fi? <br />
-                <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-                  You’re Still 100% Connected.
-                </span>
-              </h2>
-              <p className="mt-4 text-slate-300 text-base sm:text-lg leading-relaxed">
-                Network drops shouldn't stop your life. Dashen SuperApp integrates seamlessly
-                with the nationwide <strong>*996# USSD protocol</strong>. Send money, pay merchants,
-                or buy airtime reliably in remote locations with zero mobile data required.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                <div className="flex items-center gap-2 text-white font-semibold text-sm mb-1">
-                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
-                  <span>Instant Fallback</span>
+                {/* 3 Step Switchers */}
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { step: 1, label: "1. Menu" },
+                    { step: 2, label: "2. Auth PIN" },
+                    { step: 3, label: "3. Receipt" },
+                  ].map((s) => (
+                    <button
+                      key={s.step}
+                      onClick={() => setDialStep(s.step)}
+                      className={`py-2 text-xs rounded-xl border font-mono font-bold transition-all cursor-pointer ${
+                        dialStep === s.step
+                          ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50"
+                          : "bg-slate-900/80 text-slate-400 border-white/10 hover:text-white"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
                 </div>
-                <p className="text-xs text-slate-400">
-                  The app automatically activates background USSD protocol the instant data connectivity fails.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                <div className="flex items-center gap-2 text-white font-semibold text-sm mb-1">
-                  <ShieldCheck className="w-4 h-4 text-amber-400" />
-                  <span>Encrypted SIM Security</span>
-                </div>
-                <p className="text-xs text-slate-400">
-                  Every request is validated via SIM authentication and hardware PIN protection.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 pt-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-sm font-bold">
-                Dial *996# from any phone in Ethiopia
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };

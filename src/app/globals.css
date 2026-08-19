@@ -4,11 +4,14 @@
   :root {
     --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: var(--font-mono), monospace;
+    /* Unified palette tokens */
+    --c-blue:  59 130 246;   /* blue-500  */
+    --c-cyan:  34 211 238;   /* cyan-400  */
   }
 }
 
 body {
-  background-color: #050811;
+  background-color: #03050b;
   color: #f1f5f9;
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -18,41 +21,42 @@ code, kbd, samp, pre, .font-mono {
   font-family: var(--font-mono);
 }
 
-/* Futuristic Fintech Animations & Keyframes */
+/* ─── Keyframes ──────────────────────────────────────────────── */
+
 @keyframes border-beam {
-  100% {
-    offset-distance: 100%;
-  }
+  100% { offset-distance: 100%; }
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-8px) rotate(1deg); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.08);
-  }
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.08); }
 }
+
+/* Slow drift for ambient light blobs */
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 15px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Horizontal scan line shimmer */
+@keyframes scan {
+  0%   { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+
+/* ─── Animation classes ──────────────────────────────────────── */
 
 .animate-border-beam {
   animation: border-beam calc(var(--duration)*1s) infinite linear;
@@ -63,60 +67,96 @@ code, kbd, samp, pre, .font-mono {
   width: max-content;
   animation: marquee 30s linear infinite;
 }
-
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.animate-float       { animation: float       6s ease-in-out infinite; }
+.animate-pulse-glow  { animation: pulse-glow  4s ease-in-out infinite; }
+.animate-drift       { animation: drift      18s ease-in-out infinite; }
+.animate-drift-slow  { animation: drift      28s ease-in-out infinite reverse; }
+
+/* ─── Section ambient layer ──────────────────────────────────── */
+
+/*
+  Wrap each section in .section-ambient to get the shared
+  diagonal noise pattern + gentle blue/cyan glow blobs.
+  The blobs are positioned via sibling divs; see SectionWrapper.
+*/
+.section-ambient {
+  position: relative;
+  overflow: hidden;
+  /* Very subtle diagonal noise */
+  background-image: repeating-linear-gradient(
+    45deg,
+    #131b2e 0px 1px,
+    transparent 1px 52px
+  );
+  background-color: #03050b;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
+/* ─── Section divider glow line ─────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(var(--c-blue) / 0.35) 30%,
+    rgba(var(--c-cyan) / 0.5) 50%,
+    rgba(var(--c-blue) / 0.35) 70%,
+    transparent
+  );
 }
 
-/* Conic Gradients */
+/* ─── Utility patterns ───────────────────────────────────────── */
+
 .bg-gradient-conic {
   background-image: conic-gradient(var(--tw-gradient-stops));
 }
 
-/* Background Patterns */
 .bg-grid-fintech {
   background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right,  rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
 }
 
 .bg-radial-gradient {
-  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.35) 0%, rgba(6, 182, 212, 0.2) 40%, rgba(5, 8, 17, 0) 75%);
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(59,130,246,0.35)  0%,
+    rgba(34,211,238,0.18) 40%,
+    rgba(3,5,11,0)        75%
+  );
 }
 
 .glass-card-fintech {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255,255,255,0.10);
 }
-
 .glass-card-fintech:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
-  border-color: rgba(6, 182, 212, 0.45);
-  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.8), 0 0 35px -5px rgba(6, 182, 212, 0.35);
+  background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
+  border-color: rgba(34,211,238,0.4);
+  box-shadow:
+    0 20px 45px -15px rgba(0,0,0,0.8),
+    0 0 35px -5px rgba(34,211,238,0.3);
 }
 
-/* Custom Fintech Scrollbar */
-::-webkit-scrollbar {
-  width: 7px;
+/* Scanline overlay for terminal / USSD sections */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.12) 2px,
+    rgba(0,0,0,0.12) 4px
+  );
 }
-::-webkit-scrollbar-track {
-  background: #050811;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
+
+/* ─── Custom scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #03050b; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }

@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { PartnerMarquee } from "@/components/sections/PartnerMarquee";
 import { Stats } from "@/components/sections/Stats";
 import { FeaturesGrid } from "@/components/sections/FeaturesGrid";
 import { MiniApps } from "@/components/sections/MiniApps";
@@ -22,10 +21,7 @@ export default function Home() {
         {/* 2. Hero with Interactive Phone Mockup & Transfer Simulator */}
         <Hero />
 
-        {/* 3. Partner & Regulatory Ecosystem Marquee Ticker */}
-        <PartnerMarquee />
-
-        {/* 4. Platform Performance & Growth Stats */}
+        {/* 3. Platform Performance & Growth Stats */}
         <Stats />
 
         {/* 5. Core SuperApp Capabilities & Category Filter */}

@@ -2,79 +2,208 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { TESTIMONIALS } from "@/data/mockData";
-import { Star, ShieldCheck, Heart, Sparkles, MessageSquare } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { Star, ShieldCheck, Heart, Sparkles, MessageSquare, Quote } from "lucide-react";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
+
+const REVIEWS_ROW_1 = [
+  {
+    id: 1,
+    name: "Dr. Almaz Bekele",
+    role: "Senior Consultant • St. Paul Hospital",
+    city: "Addis Ababa",
+    rating: 5,
+    comment: "The Fayda biometric onboarding was completely frictionless. Opened my account in under a minute without visiting a branch. Dashen SuperApp sets the new benchmark for African fintech.",
+    badge: "Fayda Tier-3 Verified",
+  },
+  {
+    id: 2,
+    name: "Yared Tadesse",
+    role: "Founder • RiftValley Coffee Export",
+    city: "Hawassa",
+    rating: 5,
+    comment: "Instant settlements to our outgrowers across Sidama with zero latency. Even when cellular network fluctuates, the automated *996# USSD fallback ensures payroll is never delayed.",
+    badge: "Merchant Verified",
+  },
+  {
+    id: 3,
+    name: "Hanan Mohammed",
+    role: "E-commerce Merchant & Fashion Director",
+    city: "Dire Dawa",
+    rating: 5,
+    comment: "The mini-apps integration is genius. I book Ethiopian Airlines flights and pay EEU utility bills directly inside the app. No more switching between 5 different portals.",
+    badge: "Power User",
+  },
+  {
+    id: 4,
+    name: "Samuel Girma",
+    role: "Software Architect • FinTech Lab",
+    city: "Addis Ababa",
+    rating: 5,
+    comment: "Finally an Ethiopian bank app with top-tier security standards and sub-second EthSwitch transfers. The UX and animations feel on par with Revolut or Apple Wallet.",
+    badge: "Tech Verified",
+  },
+];
+
+const REVIEWS_ROW_2 = [
+  {
+    id: 5,
+    name: "Bethelhem Zewdu",
+    role: "Civil Engineer & Contractor",
+    city: "Bahir Dar",
+    rating: 5,
+    comment: "Digital Eqwub is a game changer for our construction collective. Transparent automated payouts, escrow guarantees, and zero manual spreadsheet tracking.",
+    badge: "Eqwub Host",
+  },
+  {
+    id: 6,
+    name: "Dawit Wolde",
+    role: "University Lecturer & Author",
+    city: "Mekelle",
+    rating: 5,
+    comment: "The AI predictive expense breakdown opened my eyes to where my monthly income actually goes. The emergency savings pot accrues high yields automatically.",
+    badge: "Verified Account",
+  },
+  {
+    id: 7,
+    name: "Senait Hailu",
+    role: "Hospitality Manager • Kuriftu Resorts",
+    city: "Bishoftu",
+    rating: 5,
+    comment: "Guest payments and instant Telebirr interoperability work like magic. The 1-tap card freeze feature gives complete peace of mind when traveling abroad.",
+    badge: "Business Tier",
+  },
+  {
+    id: 8,
+    name: "Ephrem Negash",
+    role: "Fintech Researcher • AAU",
+    city: "Addis Ababa",
+    rating: 5,
+    comment: "Dashen's zero-downtime architecture backed by nationwide USSD is a masterclass in inclusive financial engineering for emerging markets.",
+    badge: "Verified Analyst",
+  },
+];
 
 export const TestimonialsSection = () => {
   return (
-    <section className="py-24 bg-[#050811] relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge variant="cyan" className="mb-4">
-            <Heart className="w-3.5 h-3.5 mr-1 text-rose-400 fill-rose-400" />
-            Loved Across Ethiopia
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Trusted by Over 5.8 Million <br />
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Everyday Ethiopians & Businesses
+    <SectionWrapper id="testimonials" glow="center" className="py-32 sm:py-40">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* ── Section header ─────────────────────────── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8
+                        border-b border-white/[0.06] pb-16 mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, ease: [0.21, 0.45, 0.27, 0.99] }}
+          >
+            <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.35em]">
+              Community & Social Proof
             </span>
-          </h2>
-          <p className="mt-4 text-slate-400 text-base sm:text-lg">
-            See how merchants, students, remote travelers, and tech innovators rely on Dashen SuperApp daily.
-          </p>
-        </div>
+            <h2 className="mt-4 text-6xl md:text-8xl font-black text-white tracking-tighter
+                           uppercase leading-[0.85]">
+              Real Stories.
+              <br />
+              Empowered.
+            </h2>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t, idx) => (
-            <motion.div
-              key={t.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-7 rounded-3xl bg-[#090f1d] border border-white/[0.08] hover:border-blue-500/30 transition-all flex flex-col justify-between shadow-xl group hover:shadow-blue-500/10"
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: 0.12 }}
+            className="max-w-xs text-slate-500 font-mono text-xs leading-relaxed
+                       uppercase tracking-widest md:text-right"
+          >
+            From bustling merchant stalls in Merkato to remote coffee estates in Sidama, see how 5.8M+ Ethiopians power their daily lives.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* 21st.dev Style Dual Infinite Horizontal Marquee */}
+      <div className="relative space-y-6 overflow-hidden">
+        {/* Left and Right Fade Gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-r from-[#03060f] to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-l from-[#03060f] to-transparent z-20 pointer-events-none" />
+
+        {/* Row 1: Leftward Scrolling */}
+        <div className="flex animate-marquee gap-6 items-center">
+          {[...REVIEWS_ROW_1, ...REVIEWS_ROW_1].map((r, idx) => (
+            <div
+              key={idx}
+              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-blue-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between group cursor-default"
             >
               <div>
-                {/* Rating Stars */}
-                <div className="flex items-center gap-1 text-amber-400 mb-4">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(r.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2.5 py-0.5 rounded-full border border-cyan-500/20">
+                    {r.badge}
+                  </span>
                 </div>
 
-                <p className="text-sm text-slate-300 leading-relaxed italic mb-6">
-                  &ldquo;{t.comment}&rdquo;
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-5">
+                  &ldquo;{r.comment}&rdquo;
                 </p>
               </div>
 
               <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-bold text-white">
-                      {t.name}
-                    </span>
-                    {t.verified && (
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    )}
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    {r.name}
                   </div>
-                  <span className="text-xs text-slate-400">
-                    {t.role}
+                  <div className="text-[11px] text-slate-400 line-clamp-1">{r.role}</div>
+                </div>
+                <span className="text-[10px] text-slate-500 font-mono shrink-0 ml-2">
+                  {r.city}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Row 2: Rightward / Opposite Flow */}
+        <div className="flex animate-marquee gap-6 items-center [animation-direction:reverse] [animation-duration:35s]">
+          {[...REVIEWS_ROW_2, ...REVIEWS_ROW_2].map((r, idx) => (
+            <div
+              key={idx}
+              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-cyan-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-xl hover:shadow-cyan-500/10 flex flex-col justify-between group cursor-default"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(r.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-blue-300 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+                    {r.badge}
                   </span>
                 </div>
 
-                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">
-                  Verified User
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic mb-5">
+                  &ldquo;{r.comment}&rdquo;
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    {r.name}
+                  </div>
+                  <div className="text-[11px] text-slate-400 line-clamp-1">{r.role}</div>
+                </div>
+                <span className="text-[10px] text-slate-500 font-mono shrink-0 ml-2">
+                  {r.city}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
