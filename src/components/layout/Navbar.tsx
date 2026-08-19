@@ -2,13 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Smartphone,
-  Menu,
-  X,
-  ArrowRight,
-} from "lucide-react";
+import { Smartphone, Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
@@ -44,27 +40,17 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo & Brand */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300">
-              <div className="w-full h-full bg-white dark:bg-[#090d16] rounded-[11px] flex items-center justify-center">
-                <span className="text-xl font-black bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
-                  D
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  Dashen
-                </span>
-                <span className="text-xs px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-600 dark:text-blue-400 font-semibold border border-blue-500/30 uppercase tracking-wider">
-                  SuperApp
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 tracking-wider font-mono">
-                ALWAYS ONE STEP AHEAD
-              </span>
+          {/* Logo & Brand Image */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative h-11 w-11 rounded-xl overflow-hidden shadow-md shadow-blue-950/20 group-hover:scale-105 transition-transform duration-200 border border-blue-900/20 dark:border-white/10">
+              <Image
+                src="/dashen-logo.png"
+                alt="Dashen Bank"
+                width={44}
+                height={44}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
           </Link>
 
@@ -160,8 +146,12 @@ export const Navbar = () => {
 
               <div className="pt-4 border-t border-slate-200 dark:border-white/10 flex flex-col gap-3">
                 <div className="flex items-center justify-between p-3 rounded-xl bg-white/80 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-sm">
-                  <span className="text-slate-600 dark:text-slate-400">Offline USSD Dial:</span>
-                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">*996#</span>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Offline USSD Dial:
+                  </span>
+                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
+                    *996#
+                  </span>
                 </div>
                 <Button
                   variant="glow"

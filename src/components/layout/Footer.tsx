@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -16,11 +17,15 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-200 dark:border-white/[0.08]">
           {/* Brand & Description */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-[1px] shadow-md">
-                <div className="w-full h-full bg-white dark:bg-[#090d16] rounded-[11px] flex items-center justify-center">
-                  <span className="text-xl font-black text-blue-600 dark:text-blue-400">D</span>
-                </div>
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative h-11 w-11 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-200 border border-slate-200 dark:border-white/10">
+                <Image
+                  src="/dashen-logo.png"
+                  alt="Dashen Bank"
+                  width={44}
+                  height={44}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
@@ -30,7 +35,7 @@ export const Footer = () => {
                   Always One Step Ahead
                 </span>
               </div>
-            </div>
+            </Link>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
               The premier digital financial platform licensed and regulated by the National Bank of Ethiopia. Empowering 5.8M+ everyday lives and businesses nationwide.
             </p>

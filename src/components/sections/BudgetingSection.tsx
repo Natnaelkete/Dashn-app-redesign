@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  TrendingUp,
   ShieldCheck,
   Zap,
   Users,
@@ -212,7 +211,7 @@ const FINANCE_CARDS: FinanceCard[] = [
   {
     id: "credit",
     tag: "Instant Liquidity",
-    tagIcon: TrendingUp,
+    tagIcon: Clock,
     title: "AI CREDIT SCORING & 30-SECOND SALARY ADVANCE",
     description:
       "Access up to 3x your verified monthly salary in under 30 seconds with automated credit scoring, zero paperwork, and flexible salary deductions.",
@@ -255,12 +254,68 @@ const FINANCE_CARDS: FinanceCard[] = [
 export const BudgetingSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const totalCards = FINANCE_CARDS.length;
+
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? FINANCE_CARDS.length - 1 : prev - 1));
+    setActiveIndex((prev) => (prev - 1 + totalCards) % totalCards);
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === FINANCE_CARDS.length - 1 ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev + 1) % totalCards);
+  };
+
+  // Helper to compute shortest circular distance
+  const getCardTransform = (index: number) => {
+    let diff = index - activeIndex;
+    if (diff > totalCards / 2) diff -= totalCards;
+    if (diff < -totalCards / 2) diff += totalCards;
+
+    if (diff === 0) {
+      return {
+        x: 0,
+        scale: 1,
+        rotateY: 0,
+        opacity: 1,
+        zIndex: 30,
+        pointerEvents: "auto" as const,
+      };
+    } else if (diff === 1) {
+      return {
+        x: 320,
+        scale: 0.88,
+        rotateY: -10,
+        opacity: 0.7,
+        zIndex: 20,
+        pointerEvents: "auto" as const,
+      };
+    } else if (diff === -1) {
+      return {
+        x: -320,
+        scale: 0.88,
+        rotateY: 10,
+        opacity: 0.7,
+        zIndex: 20,
+        pointerEvents: "auto" as const,
+      };
+    } else if (diff > 1) {
+      return {
+        x: 520,
+        scale: 0.76,
+        rotateY: -18,
+        opacity: 0,
+        zIndex: 10,
+        pointerEvents: "none" as const,
+      };
+    } else {
+      return {
+        x: -520,
+        scale: 0.76,
+        rotateY: 18,
+        opacity: 0,
+        zIndex: 10,
+        pointerEvents: "none" as const,
+      };
+    }
   };
 
   return (
@@ -308,7 +363,7 @@ export const BudgetingSection = () => {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous card"
-                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-all cursor-pointer group"
+                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-colors cursor-pointer group"
               >
                 <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform text-slate-600 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400" />
               </button>
@@ -316,7 +371,7 @@ export const BudgetingSection = () => {
                 type="button"
                 onClick={handleNext}
                 aria-label="Next card"
-                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-all cursor-pointer group"
+                className="w-10 h-10 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-slate-300 dark:border-white/10 hover:border-amber-500 dark:hover:border-amber-400/50 hover:bg-black/[0.08] dark:hover:bg-white/[0.08] text-slate-800 dark:text-white flex items-center justify-center transition-colors cursor-pointer group"
               >
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform text-slate-600 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400" />
               </button>
@@ -325,76 +380,51 @@ export const BudgetingSection = () => {
         </div>
 
         {/* ── 3D Spotlight Card Deck Carousel ─────────── */}
-        <div className="relative w-full h-[580px] sm:h-[620px] flex items-center justify-center">
-          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+        <div className="relative w-full h-[580px] sm:h-[620px] flex items-center justify-center [perspective:1400px]">
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center [transform-style:preserve-3d]">
             {FINANCE_CARDS.map((card, index) => {
-              // Calculate offset relative to active card
-              let offset = index - activeIndex;
-              const total = FINANCE_CARDS.length;
-
-              // Handle wrap-around math for circular infinite carousel
-              if (offset < -Math.floor(total / 2)) offset += total;
-              if (offset > Math.floor(total / 2)) offset -= total;
-
-              const isCenter = offset === 0;
-              const isLeft = offset === -1;
-              const isRight = offset === 1;
-              const isFarLeft = offset < -1;
-              const isFarRight = offset > 1;
-
-              // Compute transforms for 3D spotlight card fan effect
-              let xPos = 0;
-              let scale = 0.85;
-              let opacity = 0;
-              let zIndex = 10;
-
-              if (isCenter) {
-                xPos = 0;
-                scale = 1.05;
-                opacity = 1;
-                zIndex = 30;
-              } else if (isLeft) {
-                xPos = -320;
-                scale = 0.9;
-                opacity = 0.65;
-                zIndex = 20;
-              } else if (isRight) {
-                xPos = 320;
-                scale = 0.9;
-                opacity = 0.65;
-                zIndex = 20;
-              } else if (isFarLeft) {
-                xPos = -540;
-                scale = 0.75;
-                opacity = 0;
-                zIndex = 10;
-              } else if (isFarRight) {
-                xPos = 540;
-                scale = 0.75;
-                opacity = 0;
-                zIndex = 10;
-              }
+              const isCenter = index === activeIndex;
+              const transform = getCardTransform(index);
 
               return (
                 <motion.div
                   key={card.id}
                   animate={{
-                    x: xPos,
-                    scale: scale,
-                    opacity: opacity,
-                    zIndex: zIndex,
+                    x: transform.x,
+                    scale: transform.scale,
+                    rotateY: transform.rotateY,
+                    opacity: transform.opacity,
+                    zIndex: transform.zIndex,
                   }}
                   transition={{
                     type: "spring",
-                    stiffness: 260,
-                    damping: 28,
+                    stiffness: 190,
+                    damping: 24,
+                    mass: 0.8,
                   }}
-                  onClick={() => setActiveIndex(index)}
-                  className={`absolute w-[310px] sm:w-[360px] md:w-[390px] h-[520px] sm:h-[550px] rounded-[28px] sm:rounded-[32px] overflow-hidden cursor-pointer transition-all duration-500 flex flex-col justify-between ${
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.15}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -50 || info.velocity.x < -300) {
+                      handleNext();
+                    } else if (info.offset.x > 50 || info.velocity.x > 300) {
+                      handlePrev();
+                    }
+                  }}
+                  onClick={() => {
+                    if (!isCenter) setActiveIndex(index);
+                  }}
+                  className={`absolute w-[310px] sm:w-[360px] md:w-[390px] h-[520px] sm:h-[550px] rounded-[28px] sm:rounded-[32px] overflow-hidden cursor-grab active:cursor-grabbing flex flex-col justify-between select-none ${
                     isCenter
-                      ? "border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#070c18] shadow-xl shadow-amber-500/10 dark:shadow-[0_30px_90px_-15px_rgba(245,158,11,0.25),0_20px_50px_-10px_rgba(0,0,0,0.9)]"
-                      : "border border-slate-200/90 dark:border-white/10 bg-slate-50 dark:bg-[#090e1a] shadow-md dark:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] hover:opacity-85 hover:border-slate-300 dark:hover:border-white/20"
+                      ? "border-2 border-amber-500 dark:border-amber-400 bg-white dark:bg-[#070c18] shadow-2xl shadow-amber-500/15 dark:shadow-[0_30px_90px_-15px_rgba(245,158,11,0.25),0_20px_50px_-10px_rgba(0,0,0,0.9)]"
+                      : "border border-slate-200/90 dark:border-white/10 bg-slate-50 dark:bg-[#090e1a] shadow-md dark:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] hover:opacity-90"
                   }`}
+                  style={{
+                    pointerEvents: transform.pointerEvents,
+                    backfaceVisibility: "hidden",
+                    willChange: "transform, opacity",
+                  }}
                 >
                   {/* Top Image / Visual Display Area */}
                   <div
@@ -431,9 +461,9 @@ export const BudgetingSection = () => {
                     <div className="pt-4 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span
-                          className={`text-xs font-bold font-mono tracking-wider transition-colors flex items-center gap-1.5 ${
+                          className={`text-xs font-bold font-mono tracking-wider flex items-center gap-1.5 ${
                             isCenter
-                              ? "text-amber-600 dark:text-amber-400 group-hover:text-amber-700 dark:group-hover:text-amber-300"
+                              ? "text-amber-600 dark:text-amber-400"
                               : "text-slate-500 dark:text-slate-400"
                           }`}
                         >
