@@ -78,21 +78,58 @@ export const CtaSection = () => {
             </div>
 
             {/* Right: QR */}
-            <div className="lg:col-span-5 flex justify-center">
+            <div className="lg:col-span-5 flex justify-center relative">
+              {/* Ambient Glow Behind QR */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-col items-center gap-4 p-5 rounded-3xl bg-slate-50 dark:bg-white/[0.03]
-                           border border-slate-200/90 dark:border-white/[0.08] shadow-xl"
+                className="relative flex flex-col items-center gap-6 p-6 sm:p-8 rounded-[36px] bg-white/40 dark:bg-white/[0.02]
+                           backdrop-blur-xl border border-white/60 dark:border-white/[0.08] shadow-2xl shadow-blue-500/5 dark:shadow-none
+                           group hover:border-blue-500/30 transition-all duration-500 hover:shadow-blue-500/10"
               >
-                <div className="p-4 rounded-2xl bg-white shadow-sm border border-slate-100 dark:border-transparent">
-                  <QrCode className="w-28 h-28 text-slate-900 dark:text-[#03050b]" />
+                {/* QR Container */}
+                <div className="relative p-5 rounded-[28px] bg-white shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-transparent">
+                  
+                  {/* Viewfinder Corners */}
+                  <div className="absolute -top-1.5 -left-1.5 w-8 h-8 border-t-[3px] border-l-[3px] border-blue-600 rounded-tl-[28px] transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-hover:-translate-x-1 group-hover:-translate-y-1" />
+                  <div className="absolute -top-1.5 -right-1.5 w-8 h-8 border-t-[3px] border-r-[3px] border-blue-600 rounded-tr-[28px] transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <div className="absolute -bottom-1.5 -left-1.5 w-8 h-8 border-b-[3px] border-l-[3px] border-blue-600 rounded-bl-[28px] transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-hover:-translate-x-1 group-hover:translate-y-1" />
+                  <div className="absolute -bottom-1.5 -right-1.5 w-8 h-8 border-b-[3px] border-r-[3px] border-blue-600 rounded-br-[28px] transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-hover:translate-x-1 group-hover:translate-y-1" />
+
+                  {/* Scanline Animation */}
+                  <div className="absolute inset-0 rounded-[28px] overflow-hidden pointer-events-none">
+                    <motion.div
+                      animate={{ top: ["0%", "100%", "0%"] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100 shadow-[0_0_15px_rgba(6,182,212,0.8)]"
+                    />
+                  </div>
+
+                  {/* The QR Code */}
+                  <QrCode className="w-32 h-32 text-slate-900 transition-transform duration-500 group-hover:scale-[1.02]" strokeWidth={1.2} />
+                  
+                  {/* Center Branded Logo Overlay */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-md border-[3px] border-white">
+                    <div className="w-full h-full rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-[10px] font-black shadow-inner tracking-tighter">
+                      DB
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Scan to Install</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-500 font-mono mt-0.5">iOS 15+ · Android 9+</div>
+
+                {/* Footer text */}
+                <div className="text-center space-y-1.5">
+                  <div className="flex items-center justify-center gap-2.5">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                    </span>
+                    <div className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">Scan to Install</div>
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Point your camera to download</div>
                 </div>
               </motion.div>
             </div>

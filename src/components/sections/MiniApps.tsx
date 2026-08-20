@@ -249,7 +249,7 @@ const LifestyleStackLayer = ({
       className="absolute inset-0 flex items-center justify-center p-2 sm:p-4 will-change-transform"
     >
       <div
-        className={`w-full max-w-5xl rounded-[32px] sm:rounded-[40px] p-6 sm:p-9 lg:p-12 shadow-2xl relative overflow-hidden transition-all duration-300 ${
+        className={`w-full max-w-5xl min-h-[480px] sm:min-h-[540px] lg:min-h-[580px] flex flex-col justify-center rounded-[32px] sm:rounded-[40px] p-6 sm:p-9 lg:p-12 shadow-2xl relative overflow-hidden transition-all duration-300 ${
           isLight
             ? "bg-[#f8fafc] text-[#0f172a] border border-slate-200 shadow-[0_40px_110px_-20px_rgba(0,0,0,0.55)]"
             : card.colorScheme === "navy"
