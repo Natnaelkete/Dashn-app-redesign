@@ -9,6 +9,7 @@ import { BudgetingSection } from "@/components/sections/BudgetingSection";
 import { SecuritySection } from "@/components/sections/SecuritySection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { BlogsSection } from "@/components/sections/BlogsSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 
 export default function Home() {
@@ -42,10 +43,13 @@ export default function Home() {
         {/* 10. Community & Customer Stories */}
         <TestimonialsSection />
 
-        {/* 11. Frequently Asked Questions Guide */}
+        {/* 11. Blogs Section */}
+        <BlogsSection />
+
+        {/* 12. Frequently Asked Questions Guide */}
         <FaqSection />
 
-        {/* 12. App Store, Google Play & QR Download CTA */}
+        {/* 13. App Store, Google Play & QR Download CTA */}
         <CtaSection />
       </main>
 

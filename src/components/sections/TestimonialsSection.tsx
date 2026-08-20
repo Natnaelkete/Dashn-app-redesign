@@ -131,7 +131,7 @@ export const TestimonialsSection = () => {
           {[...REVIEWS_ROW_1, ...REVIEWS_ROW_1].map((r, idx) => (
             <div
               key={idx}
-              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-white dark:bg-gradient-to-b dark:from-white/[0.04] dark:to-white/[0.01] border border-slate-200/90 dark:border-white/[0.08] hover:border-blue-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-lg shadow-slate-900/[0.04] dark:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between group cursor-default"
+              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-white dark:bg-[#080c17] dark:bg-gradient-to-b dark:from-white/[0.04] dark:to-white/[0.01] border border-slate-200/90 dark:border-white/[0.08] hover:border-blue-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-lg shadow-slate-900/[0.04] dark:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between group cursor-default"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -170,7 +170,7 @@ export const TestimonialsSection = () => {
           {[...REVIEWS_ROW_2, ...REVIEWS_ROW_2].map((r, idx) => (
             <div
               key={idx}
-              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-white dark:bg-gradient-to-b dark:from-white/[0.04] dark:to-white/[0.01] border border-slate-200/90 dark:border-white/[0.08] hover:border-cyan-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-lg shadow-slate-900/[0.04] dark:shadow-xl hover:shadow-cyan-500/10 flex flex-col justify-between group cursor-default"
+              className="w-[320px] sm:w-[380px] p-6 rounded-3xl bg-white dark:bg-[#080c17] dark:bg-gradient-to-b dark:from-white/[0.04] dark:to-white/[0.01] border border-slate-200/90 dark:border-white/[0.08] hover:border-cyan-500/40 transition-all shrink-0 hover:scale-[1.02] shadow-lg shadow-slate-900/[0.04] dark:shadow-xl hover:shadow-cyan-500/10 flex flex-col justify-between group cursor-default"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">

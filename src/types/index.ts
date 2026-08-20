@@ -53,3 +53,22 @@ export interface FaqItem {
   answer: string;
   category: string;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  category: string;
+  readTime: string;
+  date: string;
+  image: string;
+  featured?: boolean;
+  excerpt?: string;
+  author?: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  content?: string[];
+  tags?: string[];
+}
+

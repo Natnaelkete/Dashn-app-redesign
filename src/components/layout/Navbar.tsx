@@ -21,13 +21,13 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "Features", href: "#features" },
-    { label: "Mini Apps", href: "#mini-apps", badge: "50+" },
-    { label: "AI Insights", href: "#budgeting" },
-    { label: "Offline USSD", href: "#ussd" },
-    { label: "Security", href: "#security" },
-    { label: "FAQ", href: "#faq" },
+  const navLinks: Array<{ label: string; href: string; badge?: string }> = [
+    { label: "Home", href: "/" },
+    { label: "Features", href: "/#features" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Blogs", href: "/blogs" },
+    { label: "Help Desk", href: "/help-desk" },
+    { label: "Contact Us", href: "/contact" },
   ];
 
   return (
